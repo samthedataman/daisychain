@@ -1,0 +1,22 @@
+--- original/solution.py
++++ final/solution.py
+@@ -1,12 +1,11 @@
+-from urllib.parse import urlsplit, urlunsplit, parse_qsl
++from urllib.parse import urlsplit, urlunsplit, parse_qsl, urlencode
+ 
+ def patch_query(url, updates):
+     parts = urlsplit(url)
+-    values = dict(parse_qsl(parts.query))
++    pairs = parse_qsl(parts.query, keep_blank_values=True)
+     for key, value in updates:
+-        if value:
+-            values[key] = value
+-        else:
+-            values.pop(key, None)
+-    query = "&".join(f"{k}={v}" for k, v in values.items())
+-    return urlunsplit((parts.scheme, parts.netloc, parts.path, query, ""))
++        pairs = [(k, v) for k, v in pairs if k != key]
++        if value is not None:
++            pairs.append((key, value))
++    query = urlencode(pairs)
++    return urlunsplit(parts._replace(query=query))

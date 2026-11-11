@@ -4,3 +4,6 @@
 __pycache__/
 artifacts/
 runs/
+# Sanitized benchmark artifacts are intentionally public.
+!benchmarks/results/*/artifacts/
+!benchmarks/results/*/artifacts/**

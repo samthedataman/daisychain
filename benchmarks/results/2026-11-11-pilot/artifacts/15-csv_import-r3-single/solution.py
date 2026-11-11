@@ -1,0 +1,80 @@
+import csv
+import io
+
+
+def _validate_quoting(text):
+    """Reject quotes in unquoted fields as well as unfinished quoted fields."""
+    state = "start"
+    for char in text:
+        if state == "quoted":
+            if char == '"':
+                state = "closed"
+        elif state == "closed":
+            if char == '"':
+                state = "quoted"
+            elif char == ',' or char in '\r\n':
+                state = "start"
+            else:
+                raise ValueError("Unexpected character after a closing quote")
+        elif char == '"':
+            if state != "start":
+                raise ValueError("Quote inside an unquoted field")
+            state = "quoted"
+        elif char == ',' or char in '\r\n':
+            state = "start"
+        else:
+            state = "unquoted"
+    if state == "quoted":
+        raise ValueError("Unterminated quoted field")
+
+
+def load_people(text):
+    if text.startswith('\ufeff'):
+        text = text[1:]
+    _validate_quoting(text)
+    reader = csv.reader(io.StringIO(text, newline=""), strict=True)
+    result = []
+    try:
+        header = next(reader, None)
+        if header is None:
+            raise ValueError("Missing header")
+        header = [value.strip() for value in header]
+        if len(header) != 4 or set(header) != {"name", "email", "age", "active"}:
+            raise ValueError("Invalid header")
+
+        for fields in reader:
+            fields = [value.strip() for value in fields]
+            if not any(fields):
+                continue
+            if len(fields) != len(header):
+                raise ValueError("Wrong number of fields")
+            row = dict(zip(header, fields))
+            name = row["name"]
+            email = row["email"].lower()
+            if not name:
+                raise ValueError("Name is required")
+            if (email.count('@') != 1 or email.startswith('@')
+                    or email.endswith('@') or any(c.isspace() for c in email)):
+                raise ValueError("Invalid email")
+
+            age_text = row["age"]
+            age = None
+            if age_text:
+                if any(c < '0' or c > '9' for c in age_text):
+                    raise ValueError("Age must contain only ASCII digits")
+                # Bound the conversion even for arbitrarily long digit strings.
+                significant = age_text.lstrip('0') or '0'
+                if len(significant) > 3:
+                    raise ValueError("Age out of range")
+                age = int(significant)
+                if age > 130:
+                    raise ValueError("Age out of range")
+
+            active_text = row["active"].lower()
+            if active_text not in {"true", "1", "false", "0", ""}:
+                raise ValueError("Invalid active value")
+            result.append({"name": name, "email": email, "age": age,
+                           "active": active_text in {"true", "1"}})
+    except csv.Error as exc:
+        raise ValueError("Malformed CSV") from exc
+    return result

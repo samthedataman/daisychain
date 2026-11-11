@@ -1,0 +1,9 @@
+Final assessment: improved, but one requirement remains unmet.
+
+- **Defect — `solution.py:27`:** A valid finite integer TTL such as `10**400`, with clock `0.0`, raises `OverflowError`. At capacity, the existing entry is evicted before the error, leaving the cache empty. The specification places no upper bound on integer TTLs.
+- **Improvements:** The diff addresses validation, expiry cleanup, exact expiry boundaries, LRU behavior, replacement, zero TTL, and falsy values.
+- **Verification:** Both public tests passed under Python 3.12. Additional checks passed for invalid capacities/TTLs, unchanged state after invalid TTLs, expiry, recency, replacement, and zero TTL. The overflow defect was reproduced.
+
+No files were edited. Review was sequential, without an independent reviewer context; hidden tests were not accessed. Stopping at the required final read-only review.
+
+Future lesson: test accepted numeric types at extreme magnitudes before mutating cache state.

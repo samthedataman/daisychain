@@ -1,0 +1,9 @@
+Final assessment: improved substantially, but one requirement gap remains.
+
+- **Defect:** `solution.py:37` inherits CSV’s 131,072-character field limit. A valid 140,000-character name or an age containing 140,000 zeros raises `ValueError("Malformed CSV")`. TASK.md specifies no field-length limit. The original implementation accepted these examples, making this a regression.
+- **Verification:** Python 3.12 passed both public tests and 26 additional checks covering quoting, embedded newlines, BOM, headers, blank rows, validation, and normalization. Both oversized-field checks reproduced the defect.
+- **Baseline comparison:** The final implementation adds proper CSV parsing and the required validation absent from the original.
+
+No files were edited. Hidden evaluators were not accessed; verification was targeted, not exhaustive. Review roles ran sequentially without an independent reviewer.
+
+Stopped at the required final read-only regrade. Acceptance remains incomplete. Future lesson: test parser defaults against requirements that impose no size limits.

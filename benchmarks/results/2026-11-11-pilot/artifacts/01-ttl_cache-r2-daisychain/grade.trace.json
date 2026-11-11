@@ -1,0 +1,65 @@
+{
+  "stage": "grade",
+  "started_utc": "2026-11-11T06:30:21.820804+00:00",
+  "elapsed_seconds": 61.07069383299677,
+  "exit_code": 0,
+  "timed_out": false,
+  "usage": {
+    "input_tokens": 56795,
+    "cached_input_tokens": 46208,
+    "output_tokens": 2291,
+    "reasoning_output_tokens": 15,
+    "cache_write_input_tokens": 0
+  },
+  "tool_calls": 4,
+  "errors": [],
+  "events": [
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc \"pwd; rg --files -g 'TASK.md' -g 'solution.py' -g 'test_public.py' -g 'AGENTS.md'\"",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc 'cat TASK.md solution.py test_public.py'",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc 'python3.12 -m unittest test_public -v'",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc \"python3.12 -B -c 'from solution import TTLCache\n\ndef check(name, fn):\n try:\n  fn(); print(\\\"PASS:\\\",name)\n except Exception as e: print(\\\"FAIL:\\\",name,type(e).__name__,str(e))\n\ndef invalid_capacity():\n for v in [True,False,0,-1,1.5,\\\"2\\\",None]:\n  try: TTLCache(v,lambda:0)\n  except ValueError: continue\n  raise AssertionError(\\\"accepted \\\"+repr(v))\ncheck(\\\"capacity validation\\\",invalid_capacity)\n\ndef scenario(kind):\n t=[0]; c=TTLCache(2,lambda:t[0])\n if kind==\\\"boundary\\\":\n  c.set(\\\"a\\\",1,1); t[0]=1; assert c.get(\\\"a\\\",\\\"missing\\\")==\\\"missing\\\"\n elif kind==\\\"len cleanup\\\":\n  c.set(\\\"a\\\",1,1); t[0]=2; assert len(c)==0\n elif kind==\\\"get cleanup\\\":\n  c.set(\\\"a\\\",1,1); t[0]=2; c.get(\\\"missing\\\"); assert not c.items\n elif kind==\\\"set cleanup\\\":\n  c.set(\\\"live\\\",1,10); c.set(\\\"expired\\\",2,1); t[0]=2; c.set(\\\"new\\\",3,10); assert c.get(\\\"live\\\")==1\n elif kind==\\\"zero TTL\\\":\n  c.set(\\\"a\\\",1,10); c.set(\\\"a\\\",2,0); assert c.get(\\\"a\\\",\\\"missing\\\")==\\\"missing\\\"\n elif kind==\\\"replacement\\\":\n  c.set(\\\"a\\\",1,10); c.set(\\\"b\\\",2,10); c.set(\\\"b\\\",3,20); assert c.get(\\\"a\\\")==1\n elif kind==\\\"get recency\\\":\n  c.set(\\\"a\\\",1,10); c.set(\\\"b\\\",2,10); c.get(\\\"a\\\"); c.set(\\\"c\\\",3,10); assert c.get(\\\"a\\\")==1 and c.get(\\\"b\\\") is None\n elif kind==\\\"set recency\\\":\n  c=TTLCache(3,lambda:0); c.set(\\\"a\\\",1,10); c.set(\\\"b\\\",2,10); c.set(\\\"a\\\",3,10); c.set(\\\"c\\\",4,10); c.set(\\\"d\\\",5,10); assert c.get(\\\"a\\\")==3 and c.get(\\\"b\\\") is None\nfor kind in [\\\"boundary\\\",\\\"len cleanup\\\",\\\"get cleanup\\\",\\\"set cleanup\\\",\\\"zero TTL\\\",\\\"replacement\\\",\\\"get recency\\\",\\\"set recency\\\"]: check(kind,lambda:scenario(kind))\nfor ttl in [True,False,-1,float(\\\"nan\\\"),float(\\\"inf\\\"),-float(\\\"inf\\\"),\\\"1\\\",None]:\n c=TTLCache(1,lambda:0); c.set(\\\"a\\\",1,10); before=dict(c.items)\n try: c.set(\\\"b\\\",2,ttl); result=\\\"accepted\\\"\n except Exception as e: result=type(e).__name__\n print(\\\"TTL\\\",repr(ttl),result,\\\"contents unchanged:\\\",c.items==before)\nfor value in [None,0,False,\\\"\\\"]:\n c=TTLCache(1,lambda:0); c.set(\\\"a\\\",value,10); print(\\\"falsy\\\",repr(value),\\\"preserved:\\\",c.get(\\\"a\\\",object()) is value)\n'\"",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "turn.completed",
+      "usage": {
+        "input_tokens": 56795,
+        "cached_input_tokens": 46208,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2291,
+        "reasoning_output_tokens": 15
+      }
+    }
+  ],
+  "completed": true
+}

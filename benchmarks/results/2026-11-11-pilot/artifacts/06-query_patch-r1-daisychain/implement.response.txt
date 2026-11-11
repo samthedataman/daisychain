@@ -1,0 +1,9 @@
+Repaired `solution.py`, preserving the API. It now retains duplicates, blanks, ordering and fragments; applies updates sequentially; distinguishes `None` from `""`; and encodes literal text correctly.
+
+Python 3.12 verification:
+- Public tests: **2/2 passed**.
+- Targeted checks: **12/12 passed**, including generators and input preservation.
+
+Sequential self-review found no remaining specification issues. One implementation/regrade round is complete. Hidden tests and exhaustive coverage were not verified; Git diff checks were unavailable because this directory is not a Git repository.
+
+Lesson: ordering and encoding checks catch defects the public smoke tests miss.

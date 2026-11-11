@@ -1,0 +1,9 @@
+Updated `solution.py` to validate every event, resolve ties by input order, retain tombstone versions, and deep-copy surviving payloads. Preserved the API and left task/tests unchanged.
+
+Verified with Python 3.12:
+
+- Both public tests passed.
+- Additional checks passed for 24 event orderings, 19 invalid events, one-pass input, revival, exact identifiers, and nested/cyclic payload isolation.
+- Final syntax and whitespace checks passed.
+
+Git diff review was unavailable because the workspace is not a Git repository; reviewed the final source directly.

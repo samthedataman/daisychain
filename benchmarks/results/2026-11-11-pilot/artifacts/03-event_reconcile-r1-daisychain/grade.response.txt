@@ -1,0 +1,18 @@
+Baseline assessment: **fails TASK.md**, despite passing both public smoke tests.
+
+Python 3.12 checks demonstrated:
+
+- Equal versions incorrectly retain the earlier payload.
+- A stale tombstone deletes a newer live value.
+- An older live event revives an entity after a newer tombstone.
+- All 12 invalid-input probes failed the required `ValueError` behavior.
+- A stale live event missing its payload escaped validation.
+- Nested payloads remain shared: changes propagate between input and result.
+
+Passing checks covered empty input, newer live revival, whitespace and case-sensitive identifiers, falsy payloads, and generator input.
+
+Acceptance requires every event to be validated, version ordering with later-event tie breaking, retained tombstone versions, and independent deep copies of winning live payloads.
+
+No files were edited. This was a sequential Grader-only assessment; implementation and regrading were outside the assigned role. Checks were targeted, not exhaustive. One heredoc check was blocked by the read-only environment; it was rerun successfully using `python3.12 -c`.
+
+Lesson: the public tests cover basic ordering and deletion but miss the demonstrated validation, tombstone, tie, and copying failures.

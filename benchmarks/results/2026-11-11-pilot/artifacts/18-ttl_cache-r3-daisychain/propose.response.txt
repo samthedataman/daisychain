@@ -1,0 +1,18 @@
+Strategist handoff: repair only `solution.py`, preserving the public API. No files were edited.
+
+Baseline: source inspection supports the grader’s findings. I independently confirmed both public tests pass under Python 3.12; those tests cover little of the required contract.
+
+Smallest useful repair:
+
+- Validate capacity before initialization: accept positive integers, rejecting booleans with `ValueError`.
+- Validate TTL before reading the clock or cleaning up: accept finite, nonnegative integers/floats, excluding booleans. Avoid float conversion of arbitrary integers, which could overflow.
+- Add one private cleanup helper that removes every entry with `deadline <= now`. Call it from valid `set()`, `get()`, and `__len__()`, using one clock reading per operation.
+- Retain the dictionary, using insertion order for LRU. Move successful reads and replacements to the end by removing and reinserting them.
+- After cleanup, handle zero TTL by removing the key and storing nothing. For positive TTL, remove any existing version before checking capacity, so replacement never evicts another key.
+- Return stored values directly, preserving falsy values and object identity.
+
+Verification for the implementer and regrader: run public tests plus synthetic checks for invalid capacities/TTLs, invalid-TTL atomicity and unchanged recency, exact expiry, cleanup through all three methods, zero TTL, read/replacement recency, replacement at capacity, expired-before-live eviction, and falsy/object values.
+
+Main risks are validation occurring after mutation, replacement evicting another entry, and dictionary mutation during cleanup iteration. Iterate over a snapshot or collect expired keys first.
+
+Stopped at the requested Strategist boundary. Implementation and regrade remain unperformed; the supplied 20-check results were not independently rerun. Lesson: acceptance checks must cover the full contract beyond the passing smoke tests.

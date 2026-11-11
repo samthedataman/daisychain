@@ -1,0 +1,19 @@
+The smallest useful repair is confined to `solution.py`, preserving `load_people(text)` and its return shape. No files were edited.
+
+The baseline fails acceptance despite passing both public tests, which I independently reran with Python 3.12. The grader’s broader failure evidence is consistent with the implementation.
+
+Proposed repair:
+
+- Remove at most one leading BOM, then parse with standard-library `csv.reader` over `io.StringIO(text, newline="")`, using strict parsing. Convert `csv.Error` to `ValueError`.
+- Strip header fields and require exactly four unique names: `name`, `email`, `age`, `active`, in any order. Reject missing input.
+- Strip data fields. Skip wholly blank records before checking row width; reject every other width mismatch.
+- Require a nonempty name. Lowercase email and require exactly one `@`, nonempty parts, and no whitespace.
+- Map empty age to `None`; otherwise require ASCII digits and a value from 0 through 130.
+- Explicitly map the permitted active values after lowercasing; reject everything else.
+- Return the accumulated list only after all records validate.
+
+One parsing risk needs explicit attention: `csv.reader(strict=True)` still accepts quotes inside unquoted fields. Include a focused quote-placement check so malformed quoting is rejected without breaking doubled quotes or embedded newlines.
+
+Verification should cover the public tests plus quoted fields, reordered headers, BOM handling, blank rows, width errors, each validation boundary, malformed quotes, and a valid record followed by an invalid record.
+
+Final assessment: repair proposed; implementation and regrade remain unverified because this turn is restricted to the Strategist role. Lesson: smoke-test success does not establish CSV or validation compliance.

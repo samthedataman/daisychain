@@ -1,0 +1,7 @@
+Repaired `solution.py`, preserving `load_people(text)` and its output schema. Added CSV parsing, strict quote checks, header validation, field normalization, and required `ValueError` handling.
+
+Python 3.12 verification: **2/2 public tests and 60 supplemental checks passed**.
+
+Completed one implementation round and sequential self-review. Hidden tests were not accessed. Git diff checks were unavailable because the workspace is not a Git repository. `TASK.md` and `test_public.py` were unchanged.
+
+Lesson: requirement-based checks exposed gaps the public smoke tests missed.

@@ -1,0 +1,19 @@
+Baseline assessment: **fails TASK.md acceptance criteria**, despite passing both public smoke tests.
+
+Python 3.12 verification:
+
+- Public tests: **2/2 passed**.
+- Additional targeted checks: **2/8 passed**—generator processing and input preservation.
+- Failures demonstrated:
+  - Fragment discarded.
+  - Unaffected duplicate keys collapsed and blank values dropped.
+  - Replacements kept their original position instead of moving to the end.
+  - Empty-string updates treated as deletions.
+  - Literal query text serialized without required encoding.
+  - Decoded-key replacement produced incorrect ordering.
+
+Acceptance requires preserving URL components, unaffected pairs and ordering; applying each update as removal followed by optional append; distinguishing `None` from `""`; correctly encoding literal text; and supporting unchanged inputs and one-pass generators.
+
+No files were edited. Only local synthetic checks were used. The initial heredoc check was blocked by filesystem restrictions; rerunning via `python3.12 -c` succeeded. Hidden tests and exhaustive input coverage were not verified.
+
+Stopped after the requested Grader phase. Lesson: the public smoke tests cover basic replacement and deletion but do not establish conformance to the full specification.

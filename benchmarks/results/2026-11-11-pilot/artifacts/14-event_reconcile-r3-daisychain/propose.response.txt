@@ -1,0 +1,13 @@
+The smallest repair belongs entirely in `solution.py`, preserving `reconcile(events)`.
+
+1. Validate each event before comparing versions: require a dictionary, a nonempty string entity, a nonnegative integer version excluding `bool`, a boolean `deleted` when present, and `payload` for live events. Raise `ValueError` for violations, including stale events.
+2. Retain the latest winning event per entity, including tombstones. Replace a winner when the incoming version is greater **or equal**, so later ties win.
+3. After consuming the iterable once, return surviving live payloads using standard-library `copy.deepcopy`. Copy only final winners; leave inputs untouched.
+
+Verification should cover unsorted versions, live/deleted ties in both directions, stale tombstones, blocked older revivals, newer revivals, every validation rule on stale events, generators, empty input, whitespace and case-sensitive identifiers, falsy payloads, and nested mutation isolation in both directions.
+
+Evidence: I inspected all three requested files and reran `python3.12 -B -m unittest test_public -v`; both public tests pass. The implementation supports the grader’s reported defects, so those smoke tests do not establish acceptance.
+
+Risk: arbitrary objects can customize or reject deep copying; the task specifies no fallback behavior. Hidden tests and exhaustive payload behavior remain unverified.
+
+No files were edited. Stopped at the requested Strategist boundary; implementation and regrade remain pending. Review was sequential. Future lesson: test ordering and stale-event validation explicitly.

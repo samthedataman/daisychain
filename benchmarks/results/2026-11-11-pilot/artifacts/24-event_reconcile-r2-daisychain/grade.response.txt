@@ -1,0 +1,18 @@
+Baseline assessment: **fails TASK.md**, despite passing both public smoke tests.
+
+Evidence from Python 3.12 checks:
+
+- Equal versions retain the first event; the later event must win.
+- A stale tombstone removes a newer live value.
+- An older live event revives an entity after a newer tombstone.
+- Invalid events are accepted or raise `KeyError`/`TypeError` instead of `ValueError`.
+- A stale live event missing `payload` is accepted without validation.
+- Returned payloads share both outer and nested objects with inputs, violating deep-copy isolation.
+
+Observed passes: empty input, one-pass iteration, whitespace preservation, and `None` payload handling.
+
+Acceptance requires all specified validation, version/tie ordering, tombstone retention, payload isolation, and input-preservation behavior, while preserving `reconcile(events)`.
+
+Verification: `python3.12 -B -m unittest test_public -v` passed **2/2** tests; supplemental in-memory checks exposed the failures above. An initial heredoc check was blocked by filesystem restrictions and successfully rerun using `-c`.
+
+No files changed. No hidden tests or external resources accessed. Stopping after the requested grader-only assessment; implementation and regrade remain outside this role. Lesson: the public smoke tests do not establish conformance to the full contract.

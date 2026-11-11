@@ -1,0 +1,9 @@
+Final assessment: PASS. No remaining defects or regressions found.
+
+- The baseline diff fixes duplicate and blank preservation, update ordering, empty-string handling, encoding, and fragment retention.
+- Python 3.12 verification passed: 2 public tests, 4 targeted cases, 7 URL-component cases, and 781 update sequences.
+- Checks covered generators, input preservation, decoded case-sensitive keys, Unicode, and reserved characters.
+
+No files were edited. Hidden tests were not accessed; verification is not exhaustive. Roles were reviewed sequentially without an independent reviewer.
+
+Stopped after the required final read-only regrade. Future lesson: retain edge-case coverage alongside the two public smoke tests.

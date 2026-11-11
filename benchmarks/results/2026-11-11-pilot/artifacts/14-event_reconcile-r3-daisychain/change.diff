@@ -1,0 +1,45 @@
+--- original/solution.py
++++ final/solution.py
+@@ -1,13 +1,31 @@
++from copy import deepcopy
++
++
+ def reconcile(events):
+-    result = {}
+-    versions = {}
++    """Validate events and return independent payloads for the latest winners."""
++    winners = {}
+     for event in events:
+-        entity = event["entity"]
+-        version = event["version"]
+-        if event.get("deleted"):
+-            result.pop(entity, None)
+-            versions.pop(entity, None)
+-        elif version > versions.get(entity, -1):
+-            versions[entity] = version
+-            result[entity] = event["payload"]
+-    return result
++        if not isinstance(event, dict):
++            raise ValueError("Each event must be a dictionary")
++        entity = event.get("entity")
++        version = event.get("version")
++        deleted = event.get("deleted", False)
++        if not isinstance(entity, str) or not entity:
++            raise ValueError("entity must be a nonempty string")
++        if (not isinstance(version, int) or isinstance(version, bool)
++                or version < 0):
++            raise ValueError("version must be a nonnegative integer")
++        if not isinstance(deleted, bool):
++            raise ValueError("deleted must be a bool")
++        if not deleted and "payload" not in event:
++            raise ValueError("Live events must contain payload")
++
++        # Keep tombstones so older live events cannot revive an entity.
++        if entity not in winners or version >= winners[entity][0]:
++            winners[entity] = (version, deleted, event.get("payload"))
++
++    return {
++        entity: deepcopy(payload)
++        for entity, (_, deleted, payload) in winners.items()
++        if not deleted
++    }

@@ -1,0 +1,18 @@
+Baseline: `solution.py` fails the stated expiry, validation, and LRU requirements. I independently confirmed that the public smoke tests still pass **2/2** using Python 3.12.
+
+Proposed repair, confined to `solution.py`:
+
+- Validate capacity as a positive integer, explicitly excluding `bool`.
+- Validate TTL before cleanup or any mutation: accept nonnegative integers and finite nonnegative floats; reject everything else with `ValueError`.
+- Add a shared expiry helper that removes entries whose deadline is `<= now`. Invoke it from `set()`, `get()`, and `__len__()`.
+- Preserve the existing dictionary, using insertion order for LRU. Move successful reads and replacements to the end by removing and reinserting their entries.
+- After cleanup, handle zero TTL by removing the specified key and storing nothing. For positive TTL, remove any existing version before checking capacity, ensuring replacements never evict another key.
+- Return stored values directly, preserving falsy values and object identity.
+
+Verification should cover exact-deadline expiry through all three operations, expired-entry cleanup before eviction, invalid capacity/TTL cases, mutation-free invalid TTL rejection, zero-TTL removal, read/replacement recency, misses, and falsy values. Use an injected synthetic clock without waits.
+
+Main risks are validating TTL too late, changing recency during cleanup or misses, and evicting before distinguishing replacement from insertion.
+
+No files were edited. Implementation and regrading remain unperformed because this turn is Strategist-only. No hidden checks were accessed.
+
+Lesson: passing the two smoke tests does not establish boundary or LRU correctness.

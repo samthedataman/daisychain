@@ -1,0 +1,24 @@
+The smallest repair is confined to `solution.py`, preserving `reconcile(events)`.
+
+The baseline fails the specification despite passing both public tests. Inspection supports the grader’s findings: validation is absent, ties retain earlier events, deletion discards version history, and payloads are returned by reference.
+
+Proposed implementation:
+
+1. Validate every event before comparing versions:
+   - Require a dictionary.
+   - Require a nonempty string `entity`, without normalization.
+   - Require a nonnegative integer `version`, explicitly excluding `bool`.
+   - Require `deleted` to be a boolean when supplied; default to `False`.
+   - Require the `payload` key for live events, including stale ones.
+   - Raise `ValueError` for any violation.
+2. Track the winning event per entity, replacing it when the incoming version is **greater than or equal to** the stored version.
+3. Retain winning tombstones in that tracking dictionary to prevent stale revival.
+4. After consuming the iterable once, return surviving live payloads using standard-library `copy.deepcopy`.
+
+Copying only final winners avoids attempting to copy stale payloads that cannot affect the result. Avoid truthiness checks for payload presence and deletion validation.
+
+Verification should cover the public tests plus invalid fields and event types, invalid stale events, ties in both deletion directions, stale tombstones, stale revival, newer revival, generators, falsy payloads, identifier preservation, and bidirectional nested-copy isolation.
+
+I independently ran `python3.12 -B -m unittest test_public -v`: **2 tests passed**. The grader’s additional probes were supplied evidence, not independently rerun here.
+
+No files were edited. Implementation and regrading remain unverified because this turn is explicitly Strategist-only. The roles are sequential, without an independent reviewer. Lesson: passing the smoke tests does not establish the required reconciliation semantics.

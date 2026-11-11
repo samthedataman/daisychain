@@ -1,0 +1,7 @@
+Repaired `solution.py`, preserving the API. It now retains duplicates and blanks, applies updates sequentially, distinguishes `None` from `""`, encodes literal text, and preserves fragments.
+
+Python 3.12 verification passed: 2 public tests and 9 targeted cases covering ordering, encoding, relative URLs, unchanged inputs, and one-pass iterables.
+
+One implementation and self-review round completed; observed acceptance checks pass. Review was not independent, and hidden tests were not accessed. Git diff was unavailable because this directory is not a Git repository.
+
+Lesson: smoke tests alone missed explicit query-preservation requirements.

@@ -1,0 +1,9 @@
+Repaired only `solution.py`, preserving `patch_query(url, updates)`. It now retains duplicates and blanks, applies updates sequentially, distinguishes `""` from `None`, encodes literal text correctly, and preserves other URL components.
+
+Python 3.12 verification:
+- Public tests: **2/2 passed**
+- Focused checks: **13/13 passed**, including generators and unchanged input lists.
+
+Self-review found no remaining specification gaps; the single round is complete. Review was not independent. Git diff checks were unavailable because the workspace is not a Git repository. No hidden evaluators were accessed.
+
+Lesson: the public smoke tests alone do not cover the required behavior.

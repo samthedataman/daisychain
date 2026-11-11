@@ -1,0 +1,549 @@
+{
+  "schema_version": 1,
+  "conditions": {
+    "single": {
+      "scheduled_attempts": 12,
+      "observed_attempts": 12,
+      "unrecorded_attempts": 0,
+      "workflow_completed": 12,
+      "task_successes": 12,
+      "task_success_rate": 1.0,
+      "solution_passes": 12,
+      "public_tests_passes": 12,
+      "public_tests_observations": 12,
+      "check_fraction_observations": 12,
+      "tasks_with_check_results": 4,
+      "mean_check_pass_fraction": 1.0,
+      "mean_elapsed_seconds": 52.61664520133248,
+      "median_elapsed_seconds": 50.35478722899279,
+      "total_elapsed_seconds": 631.3997424159897,
+      "usage_complete_attempts": 12,
+      "usage_complete": true,
+      "known_token_totals": {
+        "input_tokens": 798041,
+        "cached_input_tokens": 665728,
+        "output_tokens": 20258,
+        "reasoning_output_tokens": 1286,
+        "cache_write_input_tokens": 0
+      },
+      "known_estimated_credits_total": 13.344470000000001,
+      "known_estimated_credits_mean_lower_bound": 1.1120391666666667,
+      "estimated_credits_total": 13.344470000000001,
+      "estimated_credits_mean": 1.1120391666666667
+    },
+    "daisychain": {
+      "scheduled_attempts": 12,
+      "observed_attempts": 12,
+      "unrecorded_attempts": 0,
+      "workflow_completed": 12,
+      "task_successes": 12,
+      "task_success_rate": 1.0,
+      "solution_passes": 12,
+      "public_tests_passes": 12,
+      "public_tests_observations": 12,
+      "check_fraction_observations": 12,
+      "tasks_with_check_results": 4,
+      "mean_check_pass_fraction": 1.0,
+      "mean_elapsed_seconds": 206.3837718264161,
+      "median_elapsed_seconds": 183.6843525209988,
+      "total_elapsed_seconds": 2476.605261916993,
+      "usage_complete_attempts": 12,
+      "usage_complete": true,
+      "known_token_totals": {
+        "input_tokens": 2717744,
+        "cached_input_tokens": 2299904,
+        "output_tokens": 68232,
+        "reasoning_output_tokens": 1278,
+        "cache_write_input_tokens": 0
+      },
+      "known_estimated_credits_total": 43.69976,
+      "known_estimated_credits_mean_lower_bound": 3.6416466666666665,
+      "estimated_credits_total": 43.69976,
+      "estimated_credits_mean": 3.6416466666666665
+    }
+  },
+  "tasks": {
+    "csv_import": {
+      "single": {
+        "scheduled_attempts": 3,
+        "observed_attempts": 3,
+        "unrecorded_attempts": 0,
+        "workflow_completed": 3,
+        "task_successes": 3,
+        "task_success_rate": 1.0,
+        "solution_passes": 3,
+        "public_tests_passes": 3,
+        "public_tests_observations": 3,
+        "check_fraction_observations": 3,
+        "tasks_with_check_results": 1,
+        "mean_check_pass_fraction": 1.0,
+        "mean_elapsed_seconds": 55.34332887466493,
+        "median_elapsed_seconds": 56.19701016700128,
+        "total_elapsed_seconds": 166.02998662399477,
+        "usage_complete_attempts": 3,
+        "usage_complete": true,
+        "known_token_totals": {
+          "input_tokens": 186473,
+          "cached_input_tokens": 158336,
+          "output_tokens": 5831,
+          "reasoning_output_tokens": 422,
+          "cache_write_input_tokens": 0
+        },
+        "known_estimated_credits_total": 3.26044,
+        "known_estimated_credits_mean_lower_bound": 1.0868133333333334,
+        "estimated_credits_total": 3.26044,
+        "estimated_credits_mean": 1.0868133333333334
+      },
+      "daisychain": {
+        "scheduled_attempts": 3,
+        "observed_attempts": 3,
+        "unrecorded_attempts": 0,
+        "workflow_completed": 3,
+        "task_successes": 3,
+        "task_success_rate": 1.0,
+        "solution_passes": 3,
+        "public_tests_passes": 3,
+        "public_tests_observations": 3,
+        "check_fraction_observations": 3,
+        "tasks_with_check_results": 1,
+        "mean_check_pass_fraction": 1.0,
+        "mean_elapsed_seconds": 197.46996216633124,
+        "median_elapsed_seconds": 200.68956666599843,
+        "total_elapsed_seconds": 592.4098864989937,
+        "usage_complete_attempts": 3,
+        "usage_complete": true,
+        "known_token_totals": {
+          "input_tokens": 702685,
+          "cached_input_tokens": 612864,
+          "output_tokens": 18971,
+          "reasoning_output_tokens": 515,
+          "cache_write_input_tokens": 0
+        },
+        "known_estimated_credits_total": 10.76596,
+        "known_estimated_credits_mean_lower_bound": 3.5886533333333333,
+        "estimated_credits_total": 10.76596,
+        "estimated_credits_mean": 3.5886533333333333
+      }
+    },
+    "event_reconcile": {
+      "single": {
+        "scheduled_attempts": 3,
+        "observed_attempts": 3,
+        "unrecorded_attempts": 0,
+        "workflow_completed": 3,
+        "task_successes": 3,
+        "task_success_rate": 1.0,
+        "solution_passes": 3,
+        "public_tests_passes": 3,
+        "public_tests_observations": 3,
+        "check_fraction_observations": 3,
+        "tasks_with_check_results": 1,
+        "mean_check_pass_fraction": 1.0,
+        "mean_elapsed_seconds": 56.20090205566763,
+        "median_elapsed_seconds": 48.62395037501119,
+        "total_elapsed_seconds": 168.6027061670029,
+        "usage_complete_attempts": 3,
+        "usage_complete": true,
+        "known_token_totals": {
+          "input_tokens": 219281,
+          "cached_input_tokens": 189056,
+          "output_tokens": 5448,
+          "reasoning_output_tokens": 189,
+          "cache_write_input_tokens": 0
+        },
+        "known_estimated_credits_total": 3.34589,
+        "known_estimated_credits_mean_lower_bound": 1.1152966666666666,
+        "estimated_credits_total": 3.34589,
+        "estimated_credits_mean": 1.1152966666666666
+      },
+      "daisychain": {
+        "scheduled_attempts": 3,
+        "observed_attempts": 3,
+        "unrecorded_attempts": 0,
+        "workflow_completed": 3,
+        "task_successes": 3,
+        "task_success_rate": 1.0,
+        "solution_passes": 3,
+        "public_tests_passes": 3,
+        "public_tests_observations": 3,
+        "check_fraction_observations": 3,
+        "tasks_with_check_results": 1,
+        "mean_check_pass_fraction": 1.0,
+        "mean_elapsed_seconds": 174.2708424309967,
+        "median_elapsed_seconds": 162.9877907919872,
+        "total_elapsed_seconds": 522.8125272929901,
+        "usage_complete_attempts": 3,
+        "usage_complete": true,
+        "known_token_totals": {
+          "input_tokens": 687437,
+          "cached_input_tokens": 598144,
+          "output_tokens": 17318,
+          "reasoning_output_tokens": 136,
+          "cache_write_input_tokens": 0
+        },
+        "known_estimated_credits_total": 10.28951,
+        "known_estimated_credits_mean_lower_bound": 3.4298366666666666,
+        "estimated_credits_total": 10.28951,
+        "estimated_credits_mean": 3.4298366666666666
+      }
+    },
+    "query_patch": {
+      "single": {
+        "scheduled_attempts": 3,
+        "observed_attempts": 3,
+        "unrecorded_attempts": 0,
+        "workflow_completed": 3,
+        "task_successes": 3,
+        "task_success_rate": 1.0,
+        "solution_passes": 3,
+        "public_tests_passes": 3,
+        "public_tests_observations": 3,
+        "check_fraction_observations": 3,
+        "tasks_with_check_results": 1,
+        "mean_check_pass_fraction": 1.0,
+        "mean_elapsed_seconds": 41.6394659030096,
+        "median_elapsed_seconds": 37.55696812501992,
+        "total_elapsed_seconds": 124.9183977090288,
+        "usage_complete_attempts": 3,
+        "usage_complete": true,
+        "known_token_totals": {
+          "input_tokens": 170594,
+          "cached_input_tokens": 139520,
+          "output_tokens": 3729,
+          "reasoning_output_tokens": 40,
+          "cache_write_input_tokens": 0
+        },
+        "known_estimated_credits_total": 2.83475,
+        "known_estimated_credits_mean_lower_bound": 0.9449166666666667,
+        "estimated_credits_total": 2.83475,
+        "estimated_credits_mean": 0.9449166666666667
+      },
+      "daisychain": {
+        "scheduled_attempts": 3,
+        "observed_attempts": 3,
+        "unrecorded_attempts": 0,
+        "workflow_completed": 3,
+        "task_successes": 3,
+        "task_success_rate": 1.0,
+        "solution_passes": 3,
+        "public_tests_passes": 3,
+        "public_tests_observations": 3,
+        "check_fraction_observations": 3,
+        "tasks_with_check_results": 1,
+        "mean_check_pass_fraction": 1.0,
+        "mean_elapsed_seconds": 268.15030300000217,
+        "median_elapsed_seconds": 164.62595362501452,
+        "total_elapsed_seconds": 804.4509090000065,
+        "usage_complete_attempts": 3,
+        "usage_complete": true,
+        "known_token_totals": {
+          "input_tokens": 661144,
+          "cached_input_tokens": 538112,
+          "output_tokens": 13712,
+          "reasoning_output_tokens": 94,
+          "cache_write_input_tokens": 0
+        },
+        "known_estimated_credits_total": 10.92488,
+        "known_estimated_credits_mean_lower_bound": 3.641626666666667,
+        "estimated_credits_total": 10.92488,
+        "estimated_credits_mean": 3.641626666666667
+      }
+    },
+    "ttl_cache": {
+      "single": {
+        "scheduled_attempts": 3,
+        "observed_attempts": 3,
+        "unrecorded_attempts": 0,
+        "workflow_completed": 3,
+        "task_successes": 3,
+        "task_success_rate": 1.0,
+        "solution_passes": 3,
+        "public_tests_passes": 3,
+        "public_tests_observations": 3,
+        "check_fraction_observations": 3,
+        "tasks_with_check_results": 1,
+        "mean_check_pass_fraction": 1.0,
+        "mean_elapsed_seconds": 57.28288397198776,
+        "median_elapsed_seconds": 56.843213124986505,
+        "total_elapsed_seconds": 171.84865191596327,
+        "usage_complete_attempts": 3,
+        "usage_complete": true,
+        "known_token_totals": {
+          "input_tokens": 221693,
+          "cached_input_tokens": 178816,
+          "output_tokens": 5250,
+          "reasoning_output_tokens": 635,
+          "cache_write_input_tokens": 0
+        },
+        "known_estimated_credits_total": 3.90339,
+        "known_estimated_credits_mean_lower_bound": 1.30113,
+        "estimated_credits_total": 3.90339,
+        "estimated_credits_mean": 1.30113
+      },
+      "daisychain": {
+        "scheduled_attempts": 3,
+        "observed_attempts": 3,
+        "unrecorded_attempts": 0,
+        "workflow_completed": 3,
+        "task_successes": 3,
+        "task_success_rate": 1.0,
+        "solution_passes": 3,
+        "public_tests_passes": 3,
+        "public_tests_observations": 3,
+        "check_fraction_observations": 3,
+        "tasks_with_check_results": 1,
+        "mean_check_pass_fraction": 1.0,
+        "mean_elapsed_seconds": 185.64397970833429,
+        "median_elapsed_seconds": 184.38904470897978,
+        "total_elapsed_seconds": 556.9319391250028,
+        "usage_complete_attempts": 3,
+        "usage_complete": true,
+        "known_token_totals": {
+          "input_tokens": 666478,
+          "cached_input_tokens": 550784,
+          "output_tokens": 18231,
+          "reasoning_output_tokens": 533,
+          "cache_write_input_tokens": 0
+        },
+        "known_estimated_credits_total": 11.71941,
+        "known_estimated_credits_mean_lower_bound": 3.90647,
+        "estimated_credits_total": 11.71941,
+        "estimated_credits_mean": 3.90647
+      }
+    }
+  },
+  "schedule_coverage": {
+    "scheduled_attempts": 24,
+    "observed_attempts": 24,
+    "complete": true,
+    "unrecorded_attempts": []
+  },
+  "stage_breakdown": {
+    "single": {
+      "single": {
+        "calls": 12,
+        "completed_calls": 12,
+        "elapsed_observations": 12,
+        "mean_elapsed_seconds": 52.60536978792273,
+        "usage_complete_calls": 12,
+        "usage_complete": true,
+        "known_token_totals": {
+          "input_tokens": 798041,
+          "cached_input_tokens": 665728,
+          "output_tokens": 20258,
+          "reasoning_output_tokens": 1286,
+          "cache_write_input_tokens": 0
+        },
+        "known_estimated_credits_total": 13.344470000000001,
+        "known_estimated_credits_mean_lower_bound": 1.1120391666666667,
+        "estimated_credits_total": 13.344470000000001,
+        "estimated_credits_mean": 1.1120391666666667
+      }
+    },
+    "daisychain": {
+      "grade": {
+        "calls": 12,
+        "completed_calls": 12,
+        "elapsed_observations": 12,
+        "mean_elapsed_seconds": 50.315586919922985,
+        "usage_complete_calls": 12,
+        "usage_complete": true,
+        "known_token_totals": {
+          "input_tokens": 669223,
+          "cached_input_tokens": 559488,
+          "output_tokens": 20536,
+          "reasoning_output_tokens": 127,
+          "cache_write_input_tokens": 0
+        },
+        "known_estimated_credits_total": 12.01947,
+        "known_estimated_credits_mean_lower_bound": 1.0016225,
+        "estimated_credits_total": 12.01947,
+        "estimated_credits_mean": 1.0016225
+      },
+      "propose": {
+        "calls": 12,
+        "completed_calls": 12,
+        "elapsed_observations": 12,
+        "mean_elapsed_seconds": 54.27475588191495,
+        "usage_complete_calls": 12,
+        "usage_complete": true,
+        "known_token_totals": {
+          "input_tokens": 484036,
+          "cached_input_tokens": 404864,
+          "output_tokens": 6180,
+          "reasoning_output_tokens": 243,
+          "cache_write_input_tokens": 0
+        },
+        "known_estimated_credits_total": 6.51576,
+        "known_estimated_credits_mean_lower_bound": 0.54298,
+        "estimated_credits_total": 6.51576,
+        "estimated_credits_mean": 0.54298
+      },
+      "implement": {
+        "calls": 12,
+        "completed_calls": 12,
+        "elapsed_observations": 12,
+        "mean_elapsed_seconds": 49.08901791657505,
+        "usage_complete_calls": 12,
+        "usage_complete": true,
+        "known_token_totals": {
+          "input_tokens": 754751,
+          "cached_input_tokens": 612736,
+          "output_tokens": 21196,
+          "reasoning_output_tokens": 396,
+          "cache_write_input_tokens": 0
+        },
+        "known_estimated_credits_total": 13.93159,
+        "known_estimated_credits_mean_lower_bound": 1.1609658333333333,
+        "estimated_credits_total": 13.93159,
+        "estimated_credits_mean": 1.1609658333333333
+      },
+      "regrade": {
+        "calls": 12,
+        "completed_calls": 12,
+        "elapsed_observations": 12,
+        "mean_elapsed_seconds": 52.66646121508287,
+        "usage_complete_calls": 12,
+        "usage_complete": true,
+        "known_token_totals": {
+          "input_tokens": 809734,
+          "cached_input_tokens": 722816,
+          "output_tokens": 20320,
+          "reasoning_output_tokens": 512,
+          "cache_write_input_tokens": 0
+        },
+        "known_estimated_credits_total": 11.23294,
+        "known_estimated_credits_mean_lower_bound": 0.9360783333333332,
+        "estimated_credits_total": 11.23294,
+        "estimated_credits_mean": 0.9360783333333332
+      }
+    }
+  },
+  "paired": {
+    "matched_pairs": 12,
+    "unmatched_pair_keys": 0,
+    "latency_ratio_pairs": 12,
+    "mean_latency_ratio": 4.051014522429373,
+    "median_latency_ratio": 3.5409200308129583,
+    "mean_latency_difference_seconds": 153.76712662508362,
+    "complete_credit_ratio_pairs": 12,
+    "mean_estimated_credits_ratio": 3.34939447687092,
+    "median_estimated_credits_ratio": 3.135117343110238,
+    "both_succeed": 12,
+    "single_only_succeeds": 0,
+    "daisychain_only_succeeds": 0,
+    "both_fail": 0,
+    "pairs": [
+      {
+        "task_id": "csv_import",
+        "repetition": 1,
+        "single_success": true,
+        "daisychain_success": true,
+        "latency_ratio_daisychain_over_single": 4.128547794174786,
+        "latency_difference_seconds": 152.07935874999384,
+        "estimated_credits_ratio_daisychain_over_single": 3.518401953210686
+      },
+      {
+        "task_id": "csv_import",
+        "repetition": 2,
+        "single_success": true,
+        "daisychain_success": true,
+        "latency_ratio_daisychain_over_single": 3.414892669546888,
+        "latency_difference_seconds": 147.84641495899996,
+        "estimated_credits_ratio_daisychain_over_single": 3.276505861096806
+      },
+      {
+        "task_id": "csv_import",
+        "repetition": 3,
+        "single_success": true,
+        "daisychain_success": true,
+        "latency_ratio_daisychain_over_single": 3.2501931293180903,
+        "latency_difference_seconds": 126.45412616600515,
+        "estimated_credits_ratio_daisychain_over_single": 3.116570688976009
+      },
+      {
+        "task_id": "event_reconcile",
+        "repetition": 1,
+        "single_success": true,
+        "daisychain_success": true,
+        "latency_ratio_daisychain_over_single": 3.455016496372195,
+        "latency_difference_seconds": 115.8135469169938,
+        "estimated_credits_ratio_daisychain_over_single": 2.879293554822301
+      },
+      {
+        "task_id": "event_reconcile",
+        "repetition": 2,
+        "single_success": true,
+        "daisychain_success": true,
+        "latency_ratio_daisychain_over_single": 4.065304215154761,
+        "latency_difference_seconds": 149.0472000419977,
+        "estimated_credits_ratio_daisychain_over_single": 2.6952232876814235
+      },
+      {
+        "task_id": "event_reconcile",
+        "repetition": 3,
+        "single_success": true,
+        "daisychain_success": true,
+        "latency_ratio_daisychain_over_single": 2.227246386444555,
+        "latency_difference_seconds": 89.3490741669957,
+        "estimated_credits_ratio_daisychain_over_single": 3.83604351833215
+      },
+      {
+        "task_id": "query_patch",
+        "repetition": 1,
+        "single_success": true,
+        "daisychain_success": true,
+        "latency_ratio_daisychain_over_single": 4.383366438872446,
+        "latency_difference_seconds": 127.0689854999946,
+        "estimated_credits_ratio_daisychain_over_single": 4.4697142380608215
+      },
+      {
+        "task_id": "query_patch",
+        "repetition": 2,
+        "single_success": true,
+        "daisychain_success": true,
+        "latency_ratio_daisychain_over_single": 9.518917893426854,
+        "latency_difference_seconds": 428.1421284999815,
+        "estimated_credits_ratio_daisychain_over_single": 2.9089660283232863
+      },
+      {
+        "task_id": "query_patch",
+        "repetition": 3,
+        "single_success": true,
+        "daisychain_success": true,
+        "latency_ratio_daisychain_over_single": 4.350653858495454,
+        "latency_difference_seconds": 124.32139729100163,
+        "estimated_credits_ratio_daisychain_over_single": 4.4512173361354535
+      },
+      {
+        "task_id": "ttl_cache",
+        "repetition": 1,
+        "single_success": true,
+        "daisychain_success": true,
+        "latency_ratio_daisychain_over_single": 3.626823565253721,
+        "latency_difference_seconds": 132.52789254204254,
+        "estimated_credits_ratio_daisychain_over_single": 3.1536639972444673
+      },
+      {
+        "task_id": "ttl_cache",
+        "repetition": 2,
+        "single_success": true,
+        "daisychain_success": true,
+        "latency_ratio_daisychain_over_single": 2.8563680709804333,
+        "latency_difference_seconds": 119.8353737089783,
+        "estimated_credits_ratio_daisychain_over_single": 3.07158343159256
+      },
+      {
+        "task_id": "ttl_cache",
+        "repetition": 3,
+        "single_success": true,
+        "daisychain_success": true,
+        "latency_ratio_daisychain_over_single": 3.3348437511122877,
+        "latency_difference_seconds": 132.72002095801872,
+        "estimated_credits_ratio_daisychain_over_single": 2.815549826975076
+      }
+    ]
+  },
+  "cost_basis": "Estimated Standard Codex credits, not observed billing or a dollar invoice",
+  "check_metric": "Mean of within-task mean check-pass fractions; tasks equally weighted"
+}

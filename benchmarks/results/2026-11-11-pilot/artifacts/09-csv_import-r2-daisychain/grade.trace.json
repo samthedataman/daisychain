@@ -1,0 +1,65 @@
+{
+  "stage": "grade",
+  "started_utc": "2026-11-11T06:45:16.554237+00:00",
+  "elapsed_seconds": 56.21216729099979,
+  "exit_code": 0,
+  "timed_out": false,
+  "usage": {
+    "input_tokens": 56424,
+    "cached_input_tokens": 46848,
+    "output_tokens": 1947,
+    "reasoning_output_tokens": 11,
+    "cache_write_input_tokens": 0
+  },
+  "tool_calls": 4,
+  "errors": [],
+  "events": [
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc \"pwd; rg --files -g 'TASK.md' -g 'solution.py' -g 'test_public.py'\"",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc 'cat TASK.md solution.py test_public.py'",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc 'PYTHONDONTWRITEBYTECODE=1 python3.12 -m unittest test_public -v'",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc \"PYTHONDONTWRITEBYTECODE=1 python3.12 -c 'from solution import load_people\nh=\\\"name,email,age,active\\\\n\\\"\nvalid=[(\\\"quoted comma\\\",h+\\\"\\\\\\\"Doe, Sam\\\\\\\",sam@example.invalid,30,true\\\\n\\\",[{\\\"name\\\":\\\"Doe, Sam\\\",\\\"email\\\":\\\"sam@example.invalid\\\",\\\"age\\\":30,\\\"active\\\":True}]),(\\\"embedded newline\\\",h+\\\"\\\\\\\"Sam\\\\nSmith\\\\\\\",sam@example.invalid,30,true\\\\n\\\",[{\\\"name\\\":\\\"Sam\\\\nSmith\\\",\\\"email\\\":\\\"sam@example.invalid\\\",\\\"age\\\":30,\\\"active\\\":True}]),(\\\"BOM\\\",\\\"\\\\ufeff\\\"+h,[]),(\\\"false token\\\",h+\\\"Sam,sam@example.invalid,30,false\\\\n\\\",[{\\\"name\\\":\\\"Sam\\\",\\\"email\\\":\\\"sam@example.invalid\\\",\\\"age\\\":30,\\\"active\\\":False}]),(\\\"blank row\\\",h+\\\" , , , \\\\n\\\",[]),(\\\"header whitespace\\\",\\\" name , email , age , active \\\\nSam,sam@example.invalid,30,true\\\\n\\\",[{\\\"name\\\":\\\"Sam\\\",\\\"email\\\":\\\"sam@example.invalid\\\",\\\"age\\\":30,\\\"active\\\":True}]),(\\\"normalization\\\",h+\\\" Sam , SAM@example.invalid ,30,true\\\\n\\\",[{\\\"name\\\":\\\"Sam\\\",\\\"email\\\":\\\"sam@example.invalid\\\",\\\"age\\\":30,\\\"active\\\":True}])]\ninvalid=[(\\\"empty input\\\",\\\"\\\"),(\\\"duplicate header\\\",\\\"name,email,age,active,name\\\\n\\\"),(\\\"extra header\\\",\\\"name,email,age,active,extra\\\\n\\\"),(\\\"missing header\\\",\\\"name,email,age\\\\n\\\"),(\\\"short row\\\",h+\\\"Sam,sam@example.invalid,30\\\\n\\\"),(\\\"long row\\\",h+\\\"Sam,sam@example.invalid,30,true,extra\\\\n\\\"),(\\\"empty name\\\",h+\\\",sam@example.invalid,30,true\\\\n\\\"),(\\\"invalid email\\\",h+\\\"Sam,sam@@example.invalid,30,true\\\\n\\\"),(\\\"whitespace email\\\",h+\\\"Sam,sa m@example.invalid,30,true\\\\n\\\"),(\\\"negative age\\\",h+\\\"Sam,sam@example.invalid,-1,true\\\\n\\\"),(\\\"age above limit\\\",h+\\\"Sam,sam@example.invalid,131,true\\\\n\\\"),(\\\"signed age\\\",h+\\\"Sam,sam@example.invalid,+1,true\\\\n\\\"),(\\\"Unicode age\\\",h+\\\"Sam,sam@example.invalid,\u0663,true\\\\n\\\"),(\\\"invalid active\\\",h+\\\"Sam,sam@example.invalid,30,yes\\\\n\\\"),(\\\"malformed quoting\\\",h+\\\"\\\\\\\"Sam,sam@example.invalid,30,true\\\\n\\\")]\npassed=0\nfor name,data,expected in valid+[(n,d,ValueError) for n,d in invalid]:\n try:\n  actual=load_people(data); ok=expected is not ValueError and actual==expected; detail=repr(actual)\n except Exception as exc:\n  ok=expected is ValueError and isinstance(exc,ValueError); detail=type(exc).__name__+\\\": \\\"+str(exc)\n passed+=ok\n print((\\\"PASS\\\" if ok else \\\"FAIL\\\")+\\\" \\\"+name+\\\" -> \\\"+detail)\nprint(str(passed)+\\\"/\\\"+str(len(valid)+len(invalid))+\\\" supplemental checks passed\\\")'\"",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "turn.completed",
+      "usage": {
+        "input_tokens": 56424,
+        "cached_input_tokens": 46848,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1947,
+        "reasoning_output_tokens": 11
+      }
+    }
+  ],
+  "completed": true
+}

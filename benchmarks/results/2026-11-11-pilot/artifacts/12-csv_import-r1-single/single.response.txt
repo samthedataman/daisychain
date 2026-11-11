@@ -1,0 +1,5 @@
+Repaired `solution.py` while preserving `load_people(text)`. It now handles quoted CSV, validates headers and values, normalizes data, and raises `ValueError` for invalid records.
+
+Python 3.12 verification passed: 2 public tests and 26 additional cases. `TASK.md` and `test_public.py` were unchanged.
+
+Git diff checks were unavailable because the workspace is not a Git repository. No external resources or dependencies were used.

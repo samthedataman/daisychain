@@ -1,0 +1,9 @@
+Repaired `solution.py`, preserving `reconcile(events)`. Every event is validated, later ties win, tombstones retain their versions, and surviving payloads are deep-copied.
+
+Python 3.12 verification passed:
+- Public tests: **2/2**
+- Supplemental checks: 9 ordering/value cases, 23 invalid events tested both fresh and stale, nested isolation, input preservation, one-pass iteration, and cyclic payloads.
+
+One implementation round and self-regrade completed. No hidden evaluator or independent reviewer was used. `git diff --check` was unavailable because this directory is not a Git repository.
+
+Lesson: public smoke tests alone did not cover the contract’s key edge cases.

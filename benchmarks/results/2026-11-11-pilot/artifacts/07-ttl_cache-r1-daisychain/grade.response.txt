@@ -1,0 +1,22 @@
+Baseline assessment: **fails TASK.md requirements**, despite passing both public smoke tests.
+
+Python 3.12 checks confirmed:
+
+- Invalid capacity accepted, including `True`.
+- Entries remain accessible at the exact expiry deadline.
+- `len()` counts expired entries.
+- Stored falsy values return the default instead.
+- Successful reads do not update LRU recency.
+- Replacing a key can evict another key.
+- Zero TTL stores an entry.
+- Invalid TTL can evict existing data before raising `TypeError`.
+- Boolean, negative, NaN, and infinite TTLs are accepted.
+- Insertion can evict a live entry while retaining an expired one.
+
+Acceptance requires correct validation, expiry cleanup across all three operations, preserved values, LRU behavior, replacement without unrelated eviction, and invalid-TTL rejection without changing contents or recency.
+
+Verification: public tests **2/2 passed**; all nine targeted requirement checks failed, plus six invalid-TTL cases. These checks demonstrate defects but are not exhaustive.
+
+No files changed. Roles were assessed sequentially in this context; no independent reviewer was used. Stopped at the requested Grader boundary; implementation and regrade remain unperformed.
+
+Lesson: the public smoke tests alone do not establish compliance with the specification.

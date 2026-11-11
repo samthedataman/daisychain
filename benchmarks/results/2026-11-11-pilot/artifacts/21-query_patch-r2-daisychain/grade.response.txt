@@ -1,0 +1,21 @@
+Baseline: **fails TASK.md acceptance criteria**, despite passing both public smoke tests.
+
+Python 3.12 checks found:
+
+| Check | Result |
+|---|---|
+| Public tests | 2/2 passed |
+| Preserve fragment | Failed: `#keep` lost |
+| Retain duplicates and blanks | Failed: `a=1&a=2&blank=` became `a=2` |
+| Append replacements at end | Failed: replaced key kept its position |
+| Treat empty string as value | Failed: key deleted |
+| Decode keys and preserve case-sensitive ordering | Failed ordering |
+| Encode literal special characters | Failed round-trip |
+| Sequential one-pass iterator | Passed sampled case |
+| Leave updates unchanged | Passed sampled case |
+
+Acceptance requires preserving URL components, retaining unaffected query pairs and order, applying every update as remove-all then optional append, distinguishing `None` from `""`, and correctly encoding literal text.
+
+No files were edited. This was the requested grader-only pass; no implementation or regrade occurred. Hidden tests were not accessed, and checks were not exhaustive. One heredoc check was blocked by the read-only environment; it was rerun successfully using `python3.12 -B -c`.
+
+Lesson: the public tests cover basic replacement and deletion but miss several explicit requirements.

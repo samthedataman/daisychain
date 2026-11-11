@@ -1,0 +1,21 @@
+The smallest useful repair is confined to `solution.py`, preserving `load_people(text)` and its output schema. No files were changed.
+
+The baseline fails the specification despite passing both public smoke tests. I independently confirmed **2/2 public tests pass under Python 3.12**; the broader failures are documented in the supplied Grader handoff.
+
+Proposed implementation:
+
+1. Remove at most one leading BOM. Parse with standard-library `csv.reader` over `io.StringIO(text, newline="")`, preserving quoted commas and embedded newlines. Translate `csv.Error` into `ValueError`.
+2. Strip header fields, then require exactly four unique names matching `name`, `email`, `age`, and `active`. Reject missing input.
+3. Strip each data field. Skip wholly blank records before checking row width; reject every other width mismatch.
+4. Validate and normalize fields:
+   - Require a nonempty name.
+   - Lowercase email; require exactly one `@`, nonempty parts, and no whitespace.
+   - Convert blank age to `None`; otherwise require ASCII digits and a value from 0 through 130.
+   - Map the specified active tokens explicitly; reject all others.
+5. Append validated dictionaries in input order. Raise `ValueError` on any invalid record.
+
+The main parsing risk is that `csv.reader(strict=True)` alone accepts some malformed quoting, including quotes inside unquoted fields. The implementation should add narrowly scoped quote validation, with explicit checks for stray quotes, unterminated quoted fields, and characters after closing quotes.
+
+Verification should cover reordered headers, BOM with data, quoted commas/newlines, escaped quotes, blank rows of varying widths, normalization, every rejected field category, malformed quoting, and a valid row followed by an invalid row. Run public tests and these synthetic checks with Python 3.12.
+
+Implementation and regrading remain unverified because this turn is restricted to the Strategist role. Stop reason: the repair proposal is complete. Lesson: retain the public smoke tests, but use requirement-based checks to establish compliance.

@@ -1,0 +1,20 @@
+Baseline assessment: **fails TASK.md requirements**, despite passing both public smoke tests.
+
+Python 3.12 checks confirmed:
+
+- Expiry uses `>` instead of `>=`; entries remain visible at their deadline.
+- `len()` and `get()` retain expired entries. `set()` can evict a live entry while an expired entry occupies space.
+- Capacity validation is absent; `True` is accepted.
+- Invalid TTLs either succeed or raise `TypeError`, and all tested invalid TTLs change cache contents.
+- Zero TTL stores a visible value.
+- Replacing a key can evict another key.
+- Successful reads and replacements fail to refresh LRU order.
+- Stored `None`, `0`, `False`, and `""` return the default instead.
+
+Acceptance requires correct validation, mutation-free invalid TTL handling, expiry cleanup across all three operations, zero-TTL removal, proper LRU eviction and replacement, and unchanged stored values.
+
+Evidence: `python3.12 -m unittest test_public -v` passed **2/2**. Targeted local checks reproduced every failure listed above. An initial heredoc check was blocked by filesystem restrictions; rerunning through `python3.12 -B -c` succeeded.
+
+No source files were edited. Implementation and regrading remain unperformed because this turn is explicitly Grader-only. No hidden evaluators were accessed.
+
+Lesson: the public smoke tests do not establish compliance with boundary, validation, or LRU requirements.

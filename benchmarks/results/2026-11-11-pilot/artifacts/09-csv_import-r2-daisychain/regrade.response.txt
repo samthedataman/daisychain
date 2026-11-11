@@ -1,0 +1,9 @@
+The implementation substantially improves correctness, but one requirement remains unmet.
+
+- **Defect:** Valid CSV containing a 131,073-character name raises `ValueError("Malformed CSV")` because `csv.reader` retains its default 131,072-character field limit. TASK.md specifies no field-length limit.
+- **Verification:** Python 3.12 public tests passed (2/2). Another 36 assertions passed covering quoting, embedded newlines, BOM, headers, blank rows, normalization, ages, and invalid values.
+- **Comparison:** The baseline diff confirms fixes for naive CSV splitting, missing validation, and incorrect boolean conversion. No other regressions were found.
+
+Review roles were performed sequentially, without an independent reviewer. Hidden tests were not accessed. An initial heredoc check was blocked by filesystem restrictions; the checks succeeded using `python3.12 -c`.
+
+No files were edited. Stopping at the required final read-only review; the remaining defect needs a future implementation round. Lesson: test parser defaults against requirements that impose no size limits.

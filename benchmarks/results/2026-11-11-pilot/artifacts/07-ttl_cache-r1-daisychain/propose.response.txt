@@ -1,0 +1,17 @@
+The grader’s findings match the code and specification. Both public tests pass under Python 3.12, but they do not cover the reported defects.
+
+Proposed repair, limited to `solution.py`:
+
+- Validate capacity before initialization: accept positive integers, excluding `bool`; otherwise raise `ValueError`.
+- Validate TTL before reading the clock or modifying state. Accept nonnegative integers and finite nonnegative floats, excluding `bool`; otherwise raise `ValueError`.
+- Add a private cleanup helper that removes every entry whose deadline is `<= now`. Call it from `set()`, `get()`, and `__len__()`, using one clock reading per operation.
+- Preserve the existing dictionary as the LRU order, oldest first. Move successful reads and replacements to the end by removing and reinserting their entries.
+- For zero TTL, remove the requested key after cleanup and store nothing.
+- For positive TTL, remove any existing version of the key, insert its replacement as most recently used, then evict the oldest entry only if capacity is exceeded.
+- Return stored values directly, preserving falsy values and object identity.
+
+Verification should cover exact expiry boundaries; cleanup by all three operations; invalid capacities and TTLs; zero TTL; falsy values; read and replacement recency; misses preserving live order; replacement at capacity; and expired entries being removed before live eviction. Invalid-TTL checks should verify that even expired contents and recency remain unchanged.
+
+The main implementation risk is changing state before TTL validation or accidentally refreshing recency on a miss. Integer TTL validation should also avoid unnecessary float conversion, which can overflow for large integers.
+
+No files changed. Implementation and regrade remain unperformed because this turn is restricted to the Strategist role. The roles share one context; this is not an independent review. Lesson: retain focused requirement checks alongside the public smoke tests.

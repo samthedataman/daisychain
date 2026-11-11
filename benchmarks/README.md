@@ -2,6 +2,8 @@
 
 Compare a single coding-agent session with one four-stage Daisychain round on identical synthetic Python repair tasks. Read the [fixed protocol](protocol.md) before interpreting or changing the experiment.
 
+Published run: [November 11, 2026 pilot results](results/2026-11-11-pilot/RESULTS.md), [run notes](results/2026-11-11-pilot/RUN_NOTES.md), and [integrity audit](results/2026-11-11-pilot/audit.json).
+
 ## Requirements
 
 - Python 3.12 and Codex CLI with access to the chosen model.
@@ -11,6 +13,8 @@ Compare a single coding-agent session with one four-stage Daisychain round on id
 The runner uses Codex CLI flags supported by the recorded CLI version. Compatibility with other versions is not guaranteed. Candidate code and the bounded evaluator execute locally; this is not a sandbox for hostile submissions.
 
 The runner snapshots the local CLI model catalog at `~/.codex/models_cache.json` to avoid model-discovery refresh timeouts and keep metadata consistent. Populate it through normal CLI use first, or supply `--model-catalog /path/to/catalog.json`. The manifest records its hash; private catalogs and authentication state are not published.
+
+The rate card in the runner is fixed to GPT-6.1 Sol. Changing the model requires a new protocol and an updated rate card before interpreting costs. Other CLI overrides also define a different experiment; the published run uses the defaults recorded in its manifest.
 
 ## Run
 

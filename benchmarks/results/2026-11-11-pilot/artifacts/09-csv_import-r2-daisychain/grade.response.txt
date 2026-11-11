@@ -1,0 +1,17 @@
+Baseline assessment: **fails TASK.md acceptance criteria**.
+
+Python 3.12 evidence:
+
+- Public smoke tests: **2/2 passed**.
+- Supplemental checks: **1/22 passed**. The sole pass was BOM with a header-only input; BOM handling with data remains unverified.
+- Quoted commas and embedded newlines fail.
+- Header validation, row lengths, blank-row handling, whitespace normalization, and email validation fail.
+- Negative, signed, Unicode-digit, and out-of-range ages are accepted.
+- `"false"` becomes `True`; invalid active values are accepted.
+- Malformed quoting is accepted. Empty input raises `IndexError`, and short rows raise `KeyError`, instead of `ValueError`.
+
+Acceptance requires correct CSV parsing, exact header validation, normalized and validated fields, preserved input order, and `ValueError` for every invalid nonblank record.
+
+No files changed. This was a single-context Grader pass; implementation and regrading were outside the assigned role. Hidden tests were not accessed, and supplemental coverage was not exhaustive.
+
+Lesson: the two public smoke tests establish only basic behavior and blank-age support; they do not demonstrate specification compliance.

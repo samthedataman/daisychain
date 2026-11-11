@@ -1,0 +1,65 @@
+{
+  "stage": "grade",
+  "started_utc": "2026-11-11T06:49:46.765759+00:00",
+  "elapsed_seconds": 54.49767400001292,
+  "exit_code": 0,
+  "timed_out": false,
+  "usage": {
+    "input_tokens": 56390,
+    "cached_input_tokens": 46720,
+    "output_tokens": 1919,
+    "reasoning_output_tokens": 14,
+    "cache_write_input_tokens": 0
+  },
+  "tool_calls": 4,
+  "errors": [],
+  "events": [
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc \"pwd && rg --files -g 'TASK.md' -g 'solution.py' -g 'test_public.py'\"",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc 'cat TASK.md solution.py test_public.py'",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc 'python3.12 -B -m unittest test_public -v'",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc \"python3.12 -B -c 'from solution import load_people\nh=\\\"name,email,age,active\\\\n\\\"\nvalid=[(\\\"quoted comma\\\",h+\\\"\\\\\\\"Doe, Sam\\\\\\\",sam@example.invalid,30,true\\\\n\\\",\\\"Doe, Sam\\\"),(\\\"embedded newline\\\",h+\\\"\\\\\\\"Sam\\\\nSavage\\\\\\\",sam@example.invalid,30,true\\\\n\\\",\\\"Sam\\\\nSavage\\\"),(\\\"BOM\\\",\\\"\\\\ufeff\\\"+h+\\\"Sam,sam@example.invalid,30,true\\\\n\\\",\\\"Sam\\\")]\nfor label,s,name in valid:\n try:\n  r=load_people(s); print(label, \\\"PASS\\\" if r[0][\\\"name\\\"]==name else \\\"FAIL\\\",repr(r))\n except Exception as e: print(label,\\\"FAIL\\\",type(e).__name__)\nfor label,s in [(\\\"false token\\\",h+\\\"Sam,sam@example.invalid,30,false\\\\n\\\"),(\\\"blank row\\\",h+\\\",,,\\\\n\\\"),(\\\"whitespace\\\",\\\" name , email , age , active \\\\n Sam , SAM@EXAMPLE.INVALID , 30 , true \\\\n\\\")]:\n try: print(label,repr(load_people(s)))\n except Exception as e: print(label,type(e).__name__)\ninvalid=[(\\\"empty input\\\",\\\"\\\"),(\\\"missing header\\\",\\\"name,email,age\\\\n\\\"),(\\\"duplicate header\\\",\\\"name,email,age,active,active\\\\n\\\"),(\\\"extra header\\\",\\\"name,email,age,active,other\\\\n\\\"),(\\\"extra field\\\",h+\\\"Sam,sam@example.invalid,30,true,extra\\\\n\\\"),(\\\"short row\\\",h+\\\"Sam,sam@example.invalid,30\\\\n\\\"),(\\\"empty name\\\",h+\\\",sam@example.invalid,30,true\\\\n\\\"),(\\\"empty email\\\",h+\\\"Sam,,30,true\\\\n\\\"),(\\\"multiple @\\\",h+\\\"Sam,sam@@example.invalid,30,true\\\\n\\\"),(\\\"email whitespace\\\",h+\\\"Sam,s am@example.invalid,30,true\\\\n\\\"),(\\\"missing local\\\",h+\\\"Sam,@example.invalid,30,true\\\\n\\\"),(\\\"missing domain\\\",h+\\\"Sam,sam@,30,true\\\\n\\\"),(\\\"negative age\\\",h+\\\"Sam,sam@example.invalid,-1,true\\\\n\\\"),(\\\"signed age\\\",h+\\\"Sam,sam@example.invalid,+1,true\\\\n\\\"),(\\\"large age\\\",h+\\\"Sam,sam@example.invalid,131,true\\\\n\\\"),(\\\"unicode age\\\",h+\\\"Sam,sam@example.invalid,\u0663,true\\\\n\\\"),(\\\"invalid active\\\",h+\\\"Sam,sam@example.invalid,30,yes\\\\n\\\"),(\\\"unterminated quote\\\",h+\\\"\\\\\\\"Sam,sam@example.invalid,30,true\\\\n\\\")]\nn=0\nfor label,s in invalid:\n try: r=load_people(s); print(label,\\\"FAIL accepted\\\",repr(r))\n except Exception as e:\n  ok=isinstance(e,ValueError); n+=ok; print(label,\\\"PASS\\\" if ok else \\\"FAIL\\\",type(e).__name__)\nprint(\\\"Invalid-input checks:\\\",n,\\\"/\\\",len(invalid),\\\"passed\\\")'\"",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "turn.completed",
+      "usage": {
+        "input_tokens": 56390,
+        "cached_input_tokens": 46720,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1919,
+        "reasoning_output_tokens": 14
+      }
+    }
+  ],
+  "completed": true
+}

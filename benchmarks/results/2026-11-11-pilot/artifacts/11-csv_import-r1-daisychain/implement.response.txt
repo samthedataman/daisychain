@@ -1,0 +1,9 @@
+Repaired `solution.py`, preserving `load_people(text)` and its return schema. Added CSV quoting support, BOM handling, header and row validation, normalization, and explicit age/boolean parsing.
+
+Python 3.12 verification:
+- Public tests: **2/2 passed**
+- Targeted checks: **45/45 passed**
+
+Only `solution.py` was changed. Sequential self-review found no remaining failures; no independent reviewer or hidden tests were used. Git diff was unavailable because the workspace is not a Git repository.
+
+The one-round workflow is complete. Lesson: successful smoke tests alone do not establish validation correctness.

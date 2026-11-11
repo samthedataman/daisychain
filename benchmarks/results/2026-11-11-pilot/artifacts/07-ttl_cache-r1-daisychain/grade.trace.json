@@ -1,0 +1,65 @@
+{
+  "stage": "grade",
+  "started_utc": "2026-11-11T06:41:23.118596+00:00",
+  "elapsed_seconds": 53.33573791600065,
+  "exit_code": 0,
+  "timed_out": false,
+  "usage": {
+    "input_tokens": 56369,
+    "cached_input_tokens": 51584,
+    "output_tokens": 2068,
+    "reasoning_output_tokens": 31,
+    "cache_write_input_tokens": 0
+  },
+  "tool_calls": 4,
+  "errors": [],
+  "events": [
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc \"pwd && rg --files -g 'TASK.md' -g 'solution.py' -g 'test_public.py' -g 'AGENTS.md'\"",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc 'cat TASK.md solution.py test_public.py'",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc 'PYTHONDONTWRITEBYTECODE=1 python3.12 -m unittest test_public -v'",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "type": "command_execution",
+        "command": "/bin/zsh -lc \"PYTHONDONTWRITEBYTECODE=1 python3.12 -c 'from solution import TTLCache\ndef check(name, fn):\n    try: fn()\n    except Exception as e: print(f\\\"FAIL {name}: {type(e).__name__}: {e}\\\")\n    else: print(f\\\"PASS {name}\\\")\ndef capacity():\n    for v in (True, False, 0, -1, 1.5, \\\"2\\\", None):\n        try: TTLCache(v, lambda:0)\n        except ValueError: continue\n        raise AssertionError(f\\\"accepted {v\"'!r}\")\ndef expiry():\n    t=[0]; c=TTLCache(2,lambda:t[0]); c.set(\"a\",1,1); t[0]=1\n    assert c.get(\"a\",\"missing\")==\"missing\", \"survives exact deadline\"\ndef cleanup():\n    t=[0]; c=TTLCache(2,lambda:t[0]); c.set(\"a\",1,1); t[0]=2\n    assert len(c)==0, \"len includes expired entry\"\ndef values():\n    for v in (None,0,False,\"\"):\n        c=TTLCache(1,lambda:0); c.set(\"a\",v,1)\n        assert c.get(\"a\",\"missing\") is v, f\"changed {v!r}\"\ndef recency():\n    c=TTLCache(2,lambda:0); c.set(\"a\",1,10); c.set(\"b\",2,10); c.get(\"a\"); c.set(\"c\",3,10)\n    assert c.get(\"a\")==1 and c.get(\"b\") is None, \"wrong LRU eviction\"\ndef replace():\n    c=TTLCache(2,lambda:0); c.set(\"a\",1,10); c.set(\"b\",2,10); c.set(\"b\",3,10)\n    assert c.get(\"a\")==1, \"replacement evicts another key\"\ndef zero():\n    c=TTLCache(2,lambda:0); c.set(\"a\",1,0)\n    assert len(c)==0, \"stores zero ttl entry\"\ndef invalid():\n    c=TTLCache(1,lambda:0); c.set(\"a\",1,10)\n    try: c.set(\"b\",2,\"bad\")\n    except ValueError: pass\n    except Exception as e: raise AssertionError(f\"raises {type(e).__name__}; remaining entries {c.items!r}\")\n    else: raise AssertionError(\"accepted invalid ttl\")\ndef eviction():\n    t=[0]; c=TTLCache(2,lambda:t[0]); c.set(\"live\",1,10); c.set(\"expired\",2,1); t[0]=2; c.set(\"new\",3,10)\n    assert c.get(\"live\")==1, \"evicts live entry before expired entry\"\nfor name,fn in ((\"capacity\",capacity),(\"exact expiry\",expiry),(\"len cleanup\",cleanup),(\"stored values\",values),(\"LRU\",recency),(\"replacement\",replace),(\"zero ttl\",zero),(\"invalid ttl atomicity\",invalid),(\"expiry before eviction\",eviction)):\n    check(name,fn)\nfor ttl in (True,False,-1,float(\"nan\"),float(\"inf\"),float(\"-inf\")):\n    c=TTLCache(2,lambda:0)\n    try: c.set(\"x\",1,ttl)\n    except ValueError: print(f\"PASS rejects ttl={ttl!r}\")\n    else: print(f\"FAIL accepts ttl={ttl!r}\")\n'\"'\"",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "turn.completed",
+      "usage": {
+        "input_tokens": 56369,
+        "cached_input_tokens": 51584,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2068,
+        "reasoning_output_tokens": 31
+      }
+    }
+  ],
+  "completed": true
+}

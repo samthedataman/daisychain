@@ -1,0 +1,20 @@
+Baseline assessment: **fails TASK.md acceptance criteria**, despite passing both public smoke tests.
+
+Evidence from Python 3.12 checks:
+
+- Quoted commas and embedded newlines fail; BOM and header whitespace produce `KeyError`.
+- Empty input raises `IndexError` instead of `ValueError`.
+- Duplicate headers and extra fields are accepted; missing fields raise `KeyError`.
+- Blank rows are returned instead of ignored.
+- Blank names and invalid emails are accepted.
+- Ages `131`, `+30`, and Unicode `٣٠` are accepted.
+- `false` becomes `True`; invalid active value `yes` is accepted.
+- Malformed quoting is accepted.
+
+Acceptance requires standard CSV parsing, exact normalized headers, correct row widths, whitespace normalization, required name/email validation, ASCII ages within 0–130, specified boolean conversion, and `ValueError` for every invalid nonblank record.
+
+Verification: **2/2 public tests passed**; 17 targeted probes demonstrated the failures above. The initial probe invocation was blocked by the read-only environment’s heredoc restriction; rerunning with `python3.12 -c` succeeded.
+
+No files changed. No network, external records, skills, or subagents used. Hidden tests were not accessed. This completes the requested Grader role; implementation and regrading were outside this role’s scope.
+
+Lesson: the public smoke tests cover basic conversion but do not establish CSV parsing or validation compliance.

@@ -1,0 +1,23 @@
+{
+  "audited_utc": "2026-11-11T07:23:32.497584+00:00",
+  "frozen_commit": "870a091f78539703e8ec160eb8e0b2ec607393ff",
+  "scheduled_observed_identities_match": true,
+  "workflows": 24,
+  "paired_attempts": 12,
+  "stages": 60,
+  "all_frozen_source_hashes_match": true,
+  "all_final_solution_hashes_match": true,
+  "stage_usage_matches_turn_completed_events": true,
+  "workflow_usage_matches_stage_sums": true,
+  "all_workflows_completed": true,
+  "all_usage_complete": true,
+  "protected_artifact_violations": 0,
+  "held_out_checks_passed": 360,
+  "held_out_checks_total": 360,
+  "public_smoke_tests_run": 48,
+  "all_public_smoke_tests_pass": true,
+  "max_stage_aggregate_input_tokens": 76648,
+  "cache_write_input_tokens": 0,
+  "private_catalog_snapshot_hash_matches_manifest": true,
+  "scope": "Data/source/artifact integrity checks; not a complete tool or security audit"
+}

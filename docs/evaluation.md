@@ -1,6 +1,6 @@
 # How to evaluate Daisychain
 
-The repository currently supplies a workflow, not evidence of a performance gain. Evaluate it against a simpler baseline before increasing agent count or review rounds.
+The [first comparative pilot](../benchmarks/results/2026-11-11-pilot/RESULTS.md) found a full functional-quality tie with higher time and estimated cost for one-round Daisychain on four synthetic Python task families. It does not establish a performance gain or equivalence on harder work. Evaluate additional configurations against a simpler baseline before increasing agent count or review rounds.
 
 ## A practical comparison
 
@@ -26,6 +26,8 @@ Compare independent review with shared-context review, and fixed role chains wit
 
 ## Improvement roadmap
 
+- Use harder, independently sourced tasks after the pilot's quality ceiling; keep the new protocol separate from the existing results.
+- Compare a shared inference budget and a predefined adaptive repair loop with the current natural-workflow, one-round condition.
 - Calibrate the rubric using examples that reviewers can score consistently.
 - Retain counterevidence in handoffs and measure whether it changes defect detection.
 - Test whether a reviewer seeing the artifact before the implementer's rationale reduces missed defects.

@@ -1,0 +1,8 @@
+Repaired `solution.py` while preserving the API: validation, exact expiry and cleanup, LRU recency and eviction, replacement, zero TTL, and falsey values.
+
+Verified with Python 3.12:
+- Both public tests passed.
+- Additional boundary, validation, recency, and value checks passed.
+- Final files reviewed; `TASK.md` and `test_public.py` unchanged.
+
+Git diff was unavailable because the workspace is not a Git repository. No hidden or external checks were used.

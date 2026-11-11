@@ -1,0 +1,9 @@
+Updated `solution.py` to validate every event, resolve version ties by input order, retain tombstone versions, and deep-copy surviving payloads. The API is unchanged.
+
+Verified with Python 3.12:
+
+- Both public tests passed.
+- Additional edge-case checks and 500 randomized streams passed.
+- Compilation, whitespace checks, and final source review passed.
+
+`TASK.md` and `test_public.py` were unchanged. Git diff verification was unavailable because the workspace is not a Git repository.

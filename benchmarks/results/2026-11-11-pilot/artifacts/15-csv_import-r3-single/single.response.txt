@@ -1,0 +1,5 @@
+Repaired `solution.py` to parse quoted CSV and embedded newlines, validate headers and values, handle a leading BOM and blank rows, and raise `ValueError` for invalid records.
+
+Verified with Python 3.12: both public tests and 34 additional edge cases passed. `TASK.md` and `test_public.py` were unchanged.
+
+Git diff checks were unavailable because the workspace is not a Git repository. No hidden evaluators or external resources were used.

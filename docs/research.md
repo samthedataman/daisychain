@@ -81,4 +81,4 @@ The public skill includes the following design choices. Their value should be me
 
 Fresh context can reduce some information leakage, but agents may still share models, training, prompts, and blind spots. Tests can also miss defects. An effective workflow needs evidence beyond agreement among reviewers.
 
-The next step is a [comparison against a simpler baseline](evaluation.md), followed by selective improvements supported by observed failures.
+The [first comparison against a simpler baseline](../benchmarks/results/2026-11-11-pilot/RESULTS.md) reached a functional-quality ceiling on four synthetic task families, with higher time and estimated cost for the chain. Broader claims require [additional evaluation](evaluation.md), followed by selective improvements supported by observed failures.

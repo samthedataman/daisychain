@@ -1,0 +1,15 @@
+The smallest repair is confined to `solution.py`, preserving `patch_query(url, updates)`:
+
+1. Import `urlencode`.
+2. Parse into a list using `parse_qsl(parts.query, keep_blank_values=True)`.
+3. Consume `updates` once, left to right. For each update, remove every pair whose decoded key matches exactly; append `(key, value)` when `value is not None`.
+4. Serialize with `urlencode(pairs)` so values remain literal text.
+5. Recombine with `parts.fragment` preserved.
+
+This addresses duplicates, blanks, append ordering, case-sensitive matching, empty-string values, encoding, and fragments without mutating the updates input.
+
+Verification for the implementer should cover those requirements, plus relative URLs, empty updates, repeated updates to one key, and a one-pass generator. Compare decoded query pairs with blanks retained and compare non-query URL components separately.
+
+Evidence: inspected all three requested files and reran public tests with Python 3.12; **2/2 passed**. The implementation confirms the grader’s reported weaknesses. No files were edited; implementation and regrade remain pending under this strategist-only role.
+
+Risk: query encoding may normalize, as TASK.md permits. Lesson: passing the smoke tests does not establish compliance with the ordering and encoding requirements.

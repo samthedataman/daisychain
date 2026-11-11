@@ -1,0 +1,21 @@
+The smallest repair is confined to `solution.py`, preserving `reconcile(events)`.
+
+1. Validate each event **before checking whether it can win**:
+   - Require a dictionary.
+   - Require a nonempty string `entity`, without normalization.
+   - Require an integer `version >= 0`, explicitly excluding `bool`.
+   - Require `deleted` to be a boolean when present; default to `False`.
+   - Require the `payload` key for live events, accepting any value.
+   - Raise `ValueError` for all invalid events.
+
+2. Track each entity’s winning event, replacing it when the incoming version is **greater than or equal to** the stored version. This makes later ties win. Retain tombstones in this state so older live events cannot revive deleted entities.
+
+3. After consuming the iterable once, build the result from surviving live winners using standard-library `copy.deepcopy`. Copying only final winners avoids unnecessary copying of superseded payloads.
+
+Verification should cover invalid stale events, all validation boundaries, live/deleted ties, unsorted versions, stale tombstones, blocked and permitted revival, nested isolation in both directions, input preservation, and a one-pass generator.
+
+Main risk: arbitrary payload objects may define failing or unusual `__deepcopy__` behavior; the contract specifies no fallback, so avoid inventing one.
+
+Evidence: inspected all three requested files and independently reran `python3.12 -B -m unittest test_public -v`: **2/2 passed**. The source supports the grader’s identified defects; smoke-test success does not establish contract compliance.
+
+No files changed. Implementation and regrade remain unverified because this turn is strategy-only. Roles were performed sequentially without an independent reviewer. Stop reason: requested strategy handoff complete.

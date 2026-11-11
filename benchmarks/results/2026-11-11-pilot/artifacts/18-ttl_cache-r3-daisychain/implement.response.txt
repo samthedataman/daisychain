@@ -1,0 +1,7 @@
+Repaired `solution.py`, preserving the API. Added validation, exact expiry cleanup, correct LRU reads/replacements, zero-TTL removal, and unchanged value returns. `TASK.md` and `test_public.py` were not edited.
+
+Python 3.12 verification: **2/2 public tests and 42 targeted assertions passed**.
+
+Self-review found no further issues; it was not an independent regrade. Git diff checks were unavailable because this workspace is not a Git repository. No hidden evaluation was used.
+
+Stopped after the single repair round. Lesson: the public smoke tests alone do not establish the cache contract.

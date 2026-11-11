@@ -1,0 +1,15 @@
+Baseline assessment: **fails TASK.md**, despite passing both public smoke tests.
+
+Python 3.12 evidence:
+
+- Public tests: **2/2 passed**.
+- Additional targeted checks: **20/20 failed**, covering capacity validation, exact expiry, cleanup through all three methods, invalid TTL handling, zero TTL removal, LRU updates, replacement, and falsy values.
+- Invalid string and `None` TTLs raised `TypeError` after evicting existing data, violating validation and atomicity requirements.
+
+Acceptance requires every TASK.md rule: valid capacity and TTL enforcement, validation before cleanup, expiry at `now >= deadline`, expired-entry removal, correct LRU eviction and replacement, and unchanged stored values.
+
+The public tests cover only basic expiry after the deadline and simple capacity eviction; they do not establish full correctness.
+
+No files were edited. Checks were local and synthetic. One heredoc invocation was blocked by the read-only environment; the checks were rerun successfully using `python3.12 -c`. No hidden evaluation was used.
+
+Stopped at the requested Grader boundary. Implementation and regrade remain unperformed. Lesson: passing smoke tests here provides little evidence for the stricter cache contract.

@@ -1,0 +1,9 @@
+Repaired `solution.py`, preserving the API. Fixed validation, exact expiry, cleanup, LRU behavior, replacement, zero TTL, and falsy-value preservation.
+
+Python 3.12 verification:
+- Public tests: **2/2 passed**
+- Targeted assertions: **59 passed**
+
+One implementation round and sequential self-review completed. No independent review or hidden evaluator used. Git diff checks were unavailable because the workspace is not a Git repository. `TASK.md` and `test_public.py` were unchanged.
+
+Lesson: public smoke tests alone missed substantial specification failures.

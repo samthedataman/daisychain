@@ -1,0 +1,7 @@
+Repaired `solution.py`, preserving `load_people(text)` and its return shape. Added CSV parsing, strict quote validation, header and row checks, normalization, and required field conversions.
+
+Verification with Python 3.12: **2 public tests and 40 targeted checks passed**. Self-review found no remaining acceptance failures.
+
+Limits: hidden tests were not accessed; Git diff checks were unavailable because the workspace is not a Git repository. `TASK.md` and `test_public.py` were unchanged.
+
+One improvement round completed. Lesson: smoke tests alone did not establish CSV compliance.

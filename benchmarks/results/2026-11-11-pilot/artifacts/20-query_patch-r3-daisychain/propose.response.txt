@@ -1,0 +1,14 @@
+Proposed repair: change only `solution.py`, preserving `patch_query(url, updates)`.
+
+- Parse with `parse_qsl(parts.query, keep_blank_values=True)` and retain the ordered list of pairs.
+- Consume `updates` once, left to right. For each update, remove all pairs whose decoded key matches exactly; append `(key, value)` when `value is not None`, including `""`.
+- Serialize with standard-library `urlencode`, so values remain literal text and reserved characters and Unicode are encoded correctly.
+- Recombine using `parts._replace(query=query).geturl()` to preserve the other URL components within urllib’s representation.
+
+This addresses the grader’s reported failures without changing dependencies or input objects. Avoid converting pairs or updates to a dictionary: that loses duplicates and sequential update behavior.
+
+Verification should cover duplicates and blanks with empty updates; replacement ordering; repeated updates; deletion versus empty strings; decoded, case-sensitive keys; Unicode and reserved characters; fragments and relative URLs; generator consumption; and unchanged list inputs. Compare URL components and decoded ordered pairs, allowing permitted encoding normalization.
+
+I inspected all three requested files and independently reran the public tests with Python 3.12: **2/2 passed**. The grader’s **3/9 targeted result** was supplied evidence, not independently reproduced here.
+
+No files were edited. Implementation and regrade remain unverified because this turn is Strategist-only. The roles are sequential, without an independent reviewer. Lesson: the smoke tests omit most of the specified behavior.

@@ -1,0 +1,3 @@
+# Preserve captured patch context and standard CSV CRLF endings verbatim.
+benchmarks/results/**/change.diff -whitespace
+benchmarks/results/**/*.csv whitespace=cr-at-eol

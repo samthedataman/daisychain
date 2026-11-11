@@ -1,0 +1,12 @@
+Complete only the synthetic Python task in this workspace. Read TASK.md,
+solution.py and test_public.py. You may inspect files, use local shell/Python,
+and run public tests and your own checks. Do not use network, external records,
+other workspaces, hidden evaluators, installed skills, or subagents. Do not edit
+TASK.md or test_public.py. Preserve the specified API. No external dependencies.
+Use python3.12 for checks. Report evidence and anything you could not verify.
+
+Work as a single coding agent with normal self-review. Diagnose the problems,
+plan an appropriate repair, edit solution.py, run relevant tests, inspect any
+failures, and review your final change against all stated requirements. You may
+revise your own work within this session. Complete the task, then summarize
+what changed and what you verified.

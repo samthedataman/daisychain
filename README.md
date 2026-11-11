@@ -64,11 +64,29 @@ The public skill makes these choices concrete:
 - Set an effort budget and a maximum number of rounds.
 - Compare outcomes with a simpler single-agent baseline before claiming an improvement.
 
+## First benchmark: November 11, 2026
+
+The [published pilot](benchmarks/results/2026-11-11-pilot/RESULTS.md) compares four synthetic Python repair tasks, each repeated three times in both conditions: 12 paired attempts, 24 workflows, and 60 CLI sessions. Both arms use GPT-6.1 Sol with low reasoning, the same starting files, requirements and tools. The protocol was [published before scored execution](https://github.com/samthedataman/daisychain/commit/870a091f78539703e8ec160eb8e0b2ec607393ff).
+
+| Metric | Single agent | Daisychain, one round |
+| --- | ---: | ---: |
+| Attempts completing and passing all checks | 12/12 | 12/12 |
+| Mean workflow time | 52.62 s | 206.38 s |
+| Median workflow time | 50.35 s | 183.68 s |
+| Mean estimated Standard Codex credits | 1.1120 | 3.6416 |
+| Mean API-equivalent estimate in USD | $0.0445 | $0.1457 |
+
+Functional quality reached a ceiling on these tasks. The chain took 3.92 times as long and used 3.27 times the estimated credits, using ratios of the overall means, without improving the measured pass rate. One chain included a 356-second planning stage and completed just inside the 480-second limit; it remains in the results. A full-quality tie does not establish equivalence on harder tasks.
+
+Credit estimates use the [dated Codex rate card](https://learn.chatgpt.com/docs/pricing#token-rates). The optional USD conversion uses [Standard API prices](https://developers.openai.com/api/docs/pricing), checked November 11, 2026: $2 uncached input, $0.10 cached input, and $10 output per million tokens. All observed cache-write counts were zero and context sizes fit the short-context rates. Actual subscription consumption and dollar billing were not observed. This is a natural-workflow comparison, not equal inference compute.
+
+Read the [full report](benchmarks/results/2026-11-11-pilot/RESULTS.md), [run notes](benchmarks/results/2026-11-11-pilot/RUN_NOTES.md), [integrity audit](benchmarks/results/2026-11-11-pilot/audit.json), and [reproduction instructions](benchmarks/README.md). The repository includes exact prompts, sanitized handoffs and command summaries, solutions, per-check results, usage and aggregation code.
+
 ## Evidence and current limits
 
-This is an initial public release of a reusable workflow. The worked example is fictional and illustrates reporting; it is not a measured result. There are no comparative performance benchmarks yet. A higher agent-assigned grade alone does not establish better user outcomes or correct software.
+The pilot measures one fixed configuration on four small synthetic task families. It does not establish broad agent, production-engineering or usability benefits. The separate worked UI example remains fictional. Agent-assigned grades are not benchmark quality scores.
 
-[Evaluation plan](docs/evaluation.md) describes how to measure quality, regressions, time, token use, and human intervention. Contributions with reproducible, sanitized evidence are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
+The [evaluation plan](docs/evaluation.md) describes the next comparisons needed. Contributions with reproducible, sanitized evidence are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

@@ -1,0 +1,18 @@
+Baseline assessment: **fails TASK.md**, despite passing both public smoke tests.
+
+Python 3.12 checks confirmed:
+
+- Equal versions keep the first event; the later event must win.
+- An older tombstone incorrectly deletes a newer live event.
+- An older live event incorrectly revives an entity after a newer tombstone.
+- Invalid events are accepted or raise `KeyError`/`TypeError` instead of `ValueError`. Examples include empty/non-string entities, boolean/negative/fractional versions, and non-boolean `deleted`.
+- A stale live event missing `payload` is silently accepted.
+- Nested payloads remain shared: changes propagate in both directions.
+
+Passing evidence: highest-version public example, basic deletion, empty generator input, and a whitespace entity with `None` payload.
+
+Acceptance requires validation of every event, correct version and tie ordering, retained tombstone precedence, independent deep-copied payloads, unchanged inputs, and the specified API.
+
+No files were edited. Review was sequential, without an independent reviewer. Hidden tests were not accessed; arbitrary payload objects and exhaustive combinations remain unverified. One check invocation was blocked by shell temporary-file restrictions and was successfully rerun using `python3.12 -B -c`.
+
+Stopped at the requested Grader boundary. Lesson: the public smoke tests do not cover the ordering, validation, or copying requirements.

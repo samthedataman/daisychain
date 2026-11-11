@@ -1,0 +1,14 @@
+Baseline assessment: **fails TASK.md requirements**, despite passing both public smoke tests.
+
+Python 3.12 evidence:
+
+- Public tests: **2/2 passed**.
+- Targeted checks: **3/9 passed**.
+- Failures: fragment dropped; duplicates and blank values lost; replacements retain their old position; empty-string updates delete; reserved characters and Unicode are not encoded correctly.
+- Passed checks: decoded, case-sensitive key deletion; one sequential generator example; updates list unchanged.
+
+Acceptance requires preserving URL components, unaffected query pairs and ordering, applying every update sequentially with replacement appended, distinguishing `""` from `None`, correctly encoding literal text, and supporting one-pass inputs without mutation.
+
+The targeted checks demonstrate several independent failures; they are not exhaustive. An initial here-document check was blocked by filesystem restrictions, then rerun successfully using `python3.12 -B -c`.
+
+No files were edited. Stopped after the requested Grader-only assessment; implementation and regrade remain outside this role. Lesson: the two public tests do not establish compliance with the full specification.

@@ -1,0 +1,89 @@
+--- original/solution.py
++++ final/solution.py
+@@ -1,13 +1,76 @@
++import csv
++import io
++
++
++def _validate_quoting(text):
++    """Reject quotes outside quoted fields, including trailing field text."""
++    state = "start"
++    for char in text:
++        if state == "quoted":
++            if char == '"':
++                state = "closed"
++        elif state == "closed":
++            if char == '"':
++                state = "quoted"
++            elif char == ',':
++                state = "start"
++            elif char in '\r\n':
++                state = "start"
++            else:
++                raise ValueError("Unexpected text after a quoted field")
++        elif char == '"':
++            if state != "start":
++                raise ValueError("Quote inside an unquoted field")
++            state = "quoted"
++        elif char == ',' or char in '\r\n':
++            state = "start"
++        else:
++            state = "unquoted"
++    if state == "quoted":
++        raise ValueError("Unterminated quoted field")
++
++
+ def load_people(text):
+-    lines = text.strip().splitlines()
+-    header = lines[0].split(",")
++    if text.startswith('\ufeff'):
++        text = text[1:]
++    _validate_quoting(text)
++    reader = csv.reader(io.StringIO(text, newline=""), strict=True)
+     result = []
+-    for line in lines[1:]:
+-        row = dict(zip(header, line.split(",")))
+-        result.append({
+-            "name": row["name"],
+-            "email": row["email"],
+-            "age": int(row["age"]) if row["age"] else None,
+-            "active": bool(row["active"]),
+-        })
++    try:
++        header = next(reader, None)
++        if header is None:
++            raise ValueError("Missing header")
++        header = [field.strip() for field in header]
++        if len(header) != 4 or set(header) != {"name", "email", "age", "active"}:
++            raise ValueError("Invalid header")
++        for fields in reader:
++            fields = [field.strip() for field in fields]
++            if not any(fields):
++                continue
++            if len(fields) != len(header):
++                raise ValueError("Invalid number of fields")
++            row = dict(zip(header, fields))
++            if not row["name"]:
++                raise ValueError("Name is required")
++            email = row["email"].lower()
++            if (email.count('@') != 1 or any(c.isspace() for c in email)
++                    or not all(email.split('@'))):
++                raise ValueError("Invalid email")
++            age_text = row["age"]
++            age = None
++            if age_text:
++                if any(c not in "0123456789" for c in age_text):
++                    raise ValueError("Invalid age")
++                # Bound conversion even for arbitrarily many leading zeros.
++                digits = age_text.lstrip('0') or '0'
++                if len(digits) > 3 or int(digits) > 130:
++                    raise ValueError("Age out of range")
++                age = int(digits)
++            active_text = row["active"].lower()
++            if active_text not in {"true", "1", "false", "0", ""}:
++                raise ValueError("Invalid active value")
++            result.append({"name": row["name"], "email": email, "age": age,
++                           "active": active_text in {"true", "1"}})
++    except csv.Error as exc:
++        raise ValueError("Malformed CSV") from exc
+     return result

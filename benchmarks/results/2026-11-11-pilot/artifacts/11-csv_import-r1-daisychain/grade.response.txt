@@ -1,0 +1,15 @@
+Baseline assessment: **fails TASK.md**, despite passing both public smoke tests.
+
+Evidence from Python 3.12:
+- Public tests: **2/2 passed**.
+- Targeted invalid-input checks: **0/18 passed**.
+- Quoted commas, embedded newlines, BOM, and header whitespace cause errors.
+- `false` becomes `True`; blank rows become records.
+- Invalid headers, extra fields, missing names, malformed emails, invalid ages, and unterminated quotes are accepted.
+- Empty input raises `IndexError`; short rows raise `KeyError`, contrary to the required `ValueError`.
+
+Acceptance requires correct CSV parsing, exact header and row validation, whitespace normalization, email validation/lowercasing, ASCII age validation within 0–130, explicit boolean parsing, input order preservation, and `ValueError` for invalid records.
+
+No files were changed. Assessment was performed sequentially in the requested Grader role; no independent reviewer was used. Checks were targeted, not exhaustive. One shell here-document was blocked by filesystem restrictions; checks were rerun successfully using `python3.12 -B -c`.
+
+Stopped at the requested grading boundary. The public smoke tests alone are insufficient evidence of compliance.

@@ -1,0 +1,16 @@
+Propose changing only `solution.py`, preserving `load_people(text)` and its return schema.
+
+The smallest useful repair is:
+
+1. Remove one BOM only at the beginning. Parse with standard-library `csv.reader` and `io.StringIO(newline="")`, enabling strict parsing and converting `csv.Error` to `ValueError`. Ensure malformed quote placement is rejected; `strict=True` alone can accept quotes inside unquoted fields.
+2. Require a first record. Strip header fields and require exactly four unique names matching `name`, `email`, `age`, and `active`, in any order.
+3. Strip data fields, skip entirely blank records, then enforce row width before mapping fields.
+4. Validate required names and emails. Lowercase emails; require exactly one `@`, nonempty parts, and no whitespace.
+5. Accept empty ages as `None`; otherwise require ASCII digits and a value at most 130. Parse booleans using the specified explicit tokens.
+6. Accumulate results locally in input order; raise `ValueError` on any invalid record.
+
+Verification should cover quoted commas/newlines, reordered headers, BOM, whitespace, blank rows, every boolean token, age boundaries and Unicode digits, malformed emails, wrong row widths, invalid headers, and malformed quoting. Include an invalid row after a valid row to verify the call raises.
+
+I independently reran the public tests with Python 3.12: **2/2 passed**. The grader’s **0/18 invalid-input checks** remain handoff evidence; I did not reproduce that suite.
+
+No files changed. This is a sequential Strategist assessment, not an independent review. Implementation and regrade remain unverified; stopping at the requested role boundary. Lesson: the public tests cover successful examples but do not establish validation compliance.

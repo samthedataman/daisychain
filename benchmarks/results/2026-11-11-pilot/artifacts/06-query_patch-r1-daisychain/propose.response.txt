@@ -1,0 +1,14 @@
+Propose changing only `solution.py`, preserving `patch_query(url, updates)`:
+
+1. Parse with `parse_qsl(parts.query, keep_blank_values=True)` and retain the ordered list of pairs.
+2. Iterate over updates once. For each operation, remove every pair matching the decoded, case-sensitive key; append `(key, value)` when `value is not None`.
+3. Serialize with standard-library `urlencode`.
+4. Recombine using the original scheme, authority, path, and fragment.
+
+This addresses all reported failures while preserving duplicates, blanks, input immutability, and generator support. A simple list filter per update is sufficient; its cost is proportional to updates × current query pairs.
+
+Verification with Python 3.12 confirmed **2/2 public tests pass** and reproduced **all six reported failure categories**. After implementation, rerun those checks and verify repeated updates, case-sensitive matching, relative URLs, unchanged inputs, and one-pass generators.
+
+No files were edited. Implementation and regrade remain unperformed because this phase explicitly requests a proposal only. Review was sequential, without an independent reviewer or hidden tests.
+
+Lesson: parsed-pair assertions should accompany serialization checks; smoke tests alone miss ordering and encoding defects.

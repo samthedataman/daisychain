@@ -1,0 +1,9 @@
+Repaired `solution.py`, preserving the API. Fixed validation, exact-deadline expiry, cleanup, zero-TTL removal, LRU ordering, replacement, and falsy-value handling.
+
+Python 3.12 verification passed:
+- Public tests: **2/2**
+- Targeted requirement checks: **7/7**
+
+Self-review found no remaining requirement failures. `TASK.md` and `test_public.py` were unchanged. Git diff checks were unavailable because the workspace is not a Git repository; hidden evaluators were not accessed.
+
+Completed one implementation and self-regrade round. Lesson: boundary and recency checks are necessary beyond the public smoke tests.
