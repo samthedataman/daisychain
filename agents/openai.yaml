@@ -1,0 +1,4 @@
+interface:
+  display_name: "Daisychain"
+  short_description: "Chain audit, plan, fix, and regrade agents"
+  default_prompt: "Use $daisychain to audit a product, propose fixes, implement them, and regrade the result."
